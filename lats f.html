@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lats Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --muted:#d7d7d7;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+    body{
+      margin:0;
+      font-family:"Segoe UI",system-ui,Roboto,Arial;
+      background:var(--bg);
+      color:#fff;
+    }
+    .container{
+      max-width:800px;
+      margin:40px auto;
+      padding:20px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow:0 0 25px var(--shadow);
+    }
+    h1{
+      color:var(--accent);
+      text-align:center;
+      margin-bottom:10px;
+      text-shadow:0 0 6px rgba(255,60,60,0.25);
+    }
+    .info{
+      margin:20px 0;
+      font-size:16px;
+      line-height:1.6;
+    }
+    ul{
+      list-style:disc;
+      margin-left:20px;
+    }
+    li{
+      margin:8px 0;
+    }
+    .note{
+      font-size:14px;
+      color:#ccc;
+      margin-top:20px;
+    }
+    .back-btn{
+      display:block;
+      margin:30px auto 0;
+      width:200px;
+      text-align:center;
+      padding:12px;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:10px;
+      box-shadow:0 6px 20px var(--glow);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .back-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 28px var(--glow);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="exerciseContainer">
+    <h1>Lats Exercises</h1>
+    <p class="info">Loading exercises...</p>
+  </div>
+  <a class="back-btn" href="female back.html">← Back to Body</a>
+
+  <script>
+    // Get URL parameters
+    function getParams(){
+      const params = new URLSearchParams(window.location.search);
+      return {
+        difficulty: params.get('difficulty'),
+        sets: params.get('sets'),
+        reps: params.get('reps')
+      };
+    }
+
+    // Define exercises based on difficulty
+    const exercises = {
+      easy: [
+        "Lat Pulldown (Cable) - Sit, pull bar down to chest",
+        "Seated Row (Machine) - Keep back straight, pull handles"
+      ],
+      medium: [
+        "Pull-ups (Assisted if needed) - Focus on controlled movement",
+        "Dumbbell Rows - One arm at a time, maintain torso stability"
+      ],
+      hard: [
+        "Weighted Pull-ups - Add weight belt for resistance",
+        "Barbell Rows - Keep back straight, controlled lift"
+      ]
+    };
+
+    const params = getParams();
+    const container = document.getElementById('exerciseContainer');
+
+    if(container && params.difficulty){
+      const list = exercises[params.difficulty] || [];
+      container.innerHTML = `
+        <h1>Lats Exercises (${params.difficulty.toUpperCase()})</h1>
+        <p class="info"><strong>Recommended Sets:</strong> ${params.sets}, <strong>Reps:</strong> ${params.reps}</p>
+        <ul>
+          ${list.map(ex => `<li>${ex}</li>`).join('')}
+        </ul>
+        <p class="note">Always warm up before exercising. Maintain proper form to avoid injury.</p>
+      `;
+    } else {
+      container.innerHTML = `
+        <h1>Lats Exercises</h1>
+        <p class="info">Please go back and enter your Age, Height, and Weight to see personalized exercises.</p>
+      `;
+    }
+  </script>
+</body>
+</html>

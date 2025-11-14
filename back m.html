@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Back Muscles Interactive Trainer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f6f6f6;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 0.49;
+      user-select: none;
+    }
+
+    .body-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    svg path {
+      fill: transparent;
+      cursor: pointer;
+      transition: fill 0.25s ease, opacity 0.25s ease;
+      pointer-events: auto;
+      opacity: 0;
+    }
+
+    svg path.hovered {
+      fill: rgba(255, 40, 0, 0.55);
+      opacity: 1;
+      stroke: rgba(255, 40, 0, 0.55);
+      stroke-width: 1.8;
+    }
+
+    .info-box {
+      background: linear-gradient(180deg, #0f1724, #111827);
+      color: #e6eef8;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      font-family: "Segoe UI", sans-serif;
+      min-height: 220px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .info-box h2 {
+      margin: 0 0 8px 0;
+      color: #ff7a7a;
+      font-size: 18px;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #d8e6ff;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 950px) {
+      .wrapper {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <img src="back of male.png" class="body-img" id="bodyImg">
+
+    <!-- ===== TRAPEZIUS SVG ===== -->
+<!-- ===== TRAPEZIUS SVG (moved 10px more closer) ===== -->
+<svg viewBox="0 0 390 660">
+  <path id="leftTrap" 
+    d="M160,65 
+       C155,100 155,190 197,210 
+       C199,100 187,150 195,140 
+       C195,60 198,80 189,50Z" />
+
+   <path id="rightTrap" 
+    d="M240,65 
+       C245,100 245,190 203,210 
+       C201,100 213,150 205,140 
+       C205,60 202,80 211,50Z" />
+</svg>
+
+
+
+      <!-- ===== CALVES SVG ===== -->
+      <svg viewBox="0 0 400 970">
+        <path id="leftCalf" d="M123,700 C115,790 111,780 123,797 C195,835 172,770 169,703Z" />
+        <path id="rightCalf" d="M235,705 C229,740 225,799 239,810 C315,810 283,790 285,700Z" />
+      </svg>
+
+      <!-- ===== TRICEPS SVG ===== -->
+      <svg viewBox="0 0 400 560">
+        <path id="leftTriceps" d="M98,90 C93,100 103,120 113,135 C138,190 133,70 108,60Z"
+          transform="rotate(30 110 95)" />
+        <path id="rightTriceps" d="M306,60 C319,100 311,110 301,130 C273,170 283,55 300,69Z"
+          transform="rotate(-30 310 95)" />
+      </svg>
+
+      <!-- ===== FULL BACK THIGH (HAMSTRINGS & QUADS) SVG ===== -->
+      <svg viewBox="0 0 400 965">
+        <path id="leftHamQuad"
+          d="M110,520 C100,555 110,590 123,680 C110,655 190,680 168,680 C193,670 170,695 198,520 C165,555 140,520 120,520Z" />
+        <path id="rightHamQuad"
+          d="M298,520 C308,555 298,590 285,680 C298,655 218,680 240,680 C215,670 238,695 209,520 C243,555 268,520 288,520Z" />
+      </svg>
+
+      <!-- ===== LATISSIMUS DORSI SVG ===== -->
+      <svg viewBox="0 0 400 710">
+        <path id="leftLatDorsi" d="M120,123 
+          C120,140 123,200 125,210 
+          C160,290 120,290 190,230 
+          C155,190 155,150 145,118Z" transform="translate(10,0)" />
+
+        <path id="rightLatDorsi" d="M280,123 
+          C280,140 277,200 275,205 
+          C240,290 280,290 210,230 
+          C245,190 245,150 255,118Z" />
+      </svg>
+
+      <!-- ===== LOWER BACK (ERECTOR SPINAE) SVG ===== -->
+      <svg viewBox="0 0 390 840">
+        <path id="leftLowerBack" 
+          d="M183,300 
+             C155,320 157,345 159,363 
+             C170,375 189,385 197,405 
+             C203,345 197,325 198,305Z" />
+
+        <path id="rightLowerBack" 
+          d="M217,300 
+             C245,320 243,345 241,363 
+             C230,375 211,385 203,405 
+             C197,345 203,325 202,305Z" />
+      </svg>
+    </div>
+
+    <div class="info-box" id="infoBox">
+      <h2>Hover the muscles</h2>
+      <p>Move your mouse over the muscles to learn about them.</p>
+    </div>
+  </div>
+
+  <script>
+    const ids = [
+      'leftCalf', 'rightCalf', 'leftTriceps', 'rightTriceps',
+      'leftHamQuad', 'rightHamQuad', 'leftLatDorsi', 'rightLatDorsi',
+      'leftLowerBack', 'rightLowerBack', 'leftTrap', 'rightTrap'
+    ];
+
+    const infoBox = document.getElementById('infoBox');
+    const paths = ids.map(id => document.getElementById(id));
+
+    function hoverTrap() {
+      highlight(['leftTrap', 'rightTrap']);
+      infoBox.innerHTML = `<h2>Trapezius</h2>
+      <p>The trapezius spans the upper and mid-back, connecting your neck, shoulders, and spine. 
+      It stabilizes the shoulder blades and supports posture, neck, and head movements.</p>`;
+    }
+
+    function hoverCalves() {
+      highlight(['leftCalf', 'rightCalf']);
+      infoBox.innerHTML = `<h2>Calves (Gastrocnemius & Soleus)</h2>
+      <p>These muscles help you stand on your toes and push off when walking or running. 
+      They play a major role in ankle movement and stability.</p>`;
+    }
+
+    function hoverTriceps() {
+      highlight(['leftTriceps', 'rightTriceps']);
+      infoBox.innerHTML = `<h2>Triceps (Triceps Brachii)</h2>
+      <p>These muscles extend your elbows and help stabilize your arms. 
+      They are essential for pushing movements.</p>`;
+    }
+
+    function hoverHamQuad() {
+      highlight(['leftHamQuad', 'rightHamQuad']);
+      infoBox.innerHTML = `<h2>Hamstrings & Quads</h2>
+      <p>This hover covers the entire back thigh from just below the glutes down to the top of the knee. 
+      Essential for running, jumping, and leg stability.</p>`;
+    }
+
+    function hoverLatDorsi() {
+      highlight(['leftLatDorsi', 'rightLatDorsi']);
+      infoBox.innerHTML = `<h2>Latissimus Dorsi</h2>
+      <p>This hover covers the large back muscles on the sides including the lats. 
+      Important for pulling movements, posture, and back strength.</p>`;
+    }
+
+    function hoverLowerBack() {
+      highlight(['leftLowerBack', 'rightLowerBack']);
+      infoBox.innerHTML = `<h2>Lower Back (Erector Spinae)</h2>
+      <p>This region supports posture, stabilizes the spine, and aids in bending and lifting. 
+      Strengthening it helps prevent back injuries.</p>`;
+    }
+
+    function highlight(idsToAdd) {
+      paths.forEach(p => p.classList.remove('hovered'));
+      idsToAdd.forEach(id => document.getElementById(id).classList.add('hovered'));
+    }
+
+    function hoverOff() {
+      paths.forEach(p => p.classList.remove('hovered'));
+      infoBox.innerHTML = `<h2>Hover the muscles</h2>
+      <p>Move your mouse over the muscles to learn about them.</p>`;
+    }
+
+    function clickTrap() { window.open('trap.html', '_blank'); }
+    function clickCalves() { window.open('calves.html', '_blank'); }
+    function clickTriceps() { window.open('triceps.html', '_blank'); }
+    function clickHamQuad() { window.open('hamquads.html', '_blank'); }
+    function clickLatDorsi() { window.open('latdorsi.html', '_blank'); }
+    function clickLowerBack() { window.open('lowerback.html', '_blank'); }
+
+    const bind = (ids, hoverFn, clickFn) => ids.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('mouseenter', hoverFn);
+      el.addEventListener('mouseleave', hoverOff);
+      el.addEventListener('click', clickFn);
+    });
+
+    bind(['leftTrap', 'rightTrap'], hoverTrap, clickTrap);
+    bind(['leftCalf', 'rightCalf'], hoverCalves, clickCalves);
+    bind(['leftTriceps', 'rightTriceps'], hoverTriceps, clickTriceps);
+    bind(['leftHamQuad', 'rightHamQuad'], hoverHamQuad, clickHamQuad);
+    bind(['leftLatDorsi', 'rightLatDorsi'], hoverLatDorsi, clickLatDorsi);
+    bind(['leftLowerBack', 'rightLowerBack'], hoverLowerBack, clickLowerBack);
+  </script>
+</body>
+</html>

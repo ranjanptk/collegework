@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerFit Gym</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    background-color: #111;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  /* Navbar */
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff3b3b;
+    text-transform: uppercase;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  nav ul li a:hover {
+    color: #ff3b3b;
+  }
+
+  /* Hero Section with background image */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+    z-index: -1;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #ff3b3b;
+  }
+
+  .hero p {
+    font-size: 20px;
+    color: #ccc;
+    margin-top: 10px;
+    max-width: 600px;
+  }
+
+  /* Fade effect when scrolling */
+  .hero {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Info Section */
+  .content {
+    padding: 100px 50px;
+    background: #111;
+  }
+
+  .content h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #ff3b3b;
+    margin-bottom: 20px;
+  }
+
+  .content p {
+    text-align: center;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  /* Continuous Scrolling Image Slider */
+  .slider {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin: 60px 0;
+  }
+
+  .slide-track {
+    display: flex;
+    width: calc(250px * 8);
+    animation: scroll 40s linear infinite;
+  }
+
+  .slide {
+    width: 250px;
+    height: 200px;
+    margin: 0 10px;
+    flex-shrink: 0;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 4));
+    }
+  }
+
+  /* Membership Cards */
+  .membership-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    background-color: #ff3b3b;
+    color: white;
+  }
+
+  .card h3 {
+    margin-bottom: 10px;
+    color: #ff3b3b;
+  }
+
+  .card p {
+    margin-bottom: 8px;
+    color: #ccc;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    color: #888;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+    }
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hero h1 {
+      font-size: 38px;
+    }
+    .membership-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Bhatta</div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Welcome to Bhatta Gym</h1>
+  <p>Special thanks to Garima Bhatta</p>
+</section>
+
+<section class="content">
+  <h2>Our Training Programs</h2>
+  <p>We provide professional guidance for strength training, cardio fitness, bodybuilding, and personal health improvement. Whether you're just starting or aiming to reach your peak, our trainers and facilities are here to support your journey.</p>
+</section>
+
+<!-- Continuous Image Slider -->
+<section class="slider">
+  <div class="slide-track">
+    <div class="slide"><img src="https://goldsgym.in/wp-content/uploads/2023/12/compress-strong-man-training-gym-min-scaled.jpg" alt="Gym 1"></div>
+    <div class="slide"><img src="https://tse1.mm.bing.net/th/id/OIP.hBAHmQfZpAlLkjsURM_leAHaEo?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Gym 2"></div>
+    <div class="slide"><img src="https://th.bing.com/th/id/R.9f078693085dbf3321f82b47aa1c012b?rik=0TnWT2%2b%2bUAos6g&pid=ImgRaw&r=0" alt="Gym 3"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1" alt="Gym 4"></div>
+    <div class="slide"><img src="https://cdn.unityfitness.vn/2023/11/phong-gym-quan2-ndt-1.jpg" alt="Gym 5"></div>
+    <div class="slide"><img src="https://cdn.unityfitness.vn/2024/09/phong-gym-quan2-14-1024x640.jpg" alt="Gym 6"></div>
+    <div class="slide"><img src="https://gymaster.vn/wp-content/uploads/2023/02/nhan-vien-phong-gym-gymaster.vn_.jpg" alt="Gym 7"></div>
+    <div class="slide"><img src="https://th.bing.com/th/id/OIP.dhPmVtL0Tl7CXtzSvdwU4gHaE8?w=243&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="Gym 8"></div>
+    <!-- Duplicated images for smooth loop -->
+    <div class="slide"><img src="https://goldsgym.in/wp-content/uploads/2023/12/compress-strong-man-training-gym-min-scaled.jpg" alt="Gym 1"></div>
+    <div class="slide"><img src="https://tse1.mm.bing.net/th/id/OIP.hBAHmQfZpAlLkjsURM_leAHaEo?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Gym 2"></div>
+    <div class="slide"><img src="https://th.bing.com/th/id/R.9f078693085dbf3321f82b47aa1c012b?rik=0TnWT2%2b%2bUAos6g&pid=ImgRaw&r=0" alt="Gym 3"></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1" alt="Gym 4"></div>
+    <div class="slide"><img src="https://cdn.unityfitness.vn/2023/11/phong-gym-quan2-ndt-1.jpg" alt="Gym 5"></div>
+    <div class="slide"><img src="https://cdn.unityfitness.vn/2024/09/phong-gym-quan2-14-1024x640.jpg" alt="Gym 6"></div>
+    <div class="slide"><img src="https://gymaster.vn/wp-content/uploads/2023/02/nhan-vien-phong-gym-gymaster.vn_.jpg" alt="Gym 7"></div>
+    <div class="slide"><img src="https://th.bing.com/th/id/OIP.dhPmVtL0Tl7CXtzSvdwU4gHaE8?w=243&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="Gym 8"></div>
+  </div>
+</section>
+
+<!-- Membership Cards Section -->
+<section class="content">
+  <h2>Membership Plans</h2>
+  <div class="membership-cards">
+    <div class="card">
+      <h3>Basic Plan</h3>
+      <p>Duration: 1 Month</p>
+      <p>Price: $120</p>
+      <p>Perfect for beginners</p>
+    </div>
+    <div class="card">
+      <h3>Standard Plan</h3>
+      <p>Duration: 3 Months</p>
+      <p>Price: $300</p>
+      <p>Best for steady progress</p>
+    </div>
+    <div class="card">
+      <h3>Premium Plan</h3>
+      <p>Duration: 6 Months</p>
+      <p>Price: $550</p>
+      <p>Ideal for long-term fitness</p>
+    </div>
+    <div class="card">
+      <h3>Elite Plan</h3>
+      <p>Duration: 12 Months</p>
+      <p>Price: $1000</p>
+      <p>Complete transformation package</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 PowerFit Gym | Stay Strong, Stay Fit
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muscle Interactive Trainer (Wrapped)</title>
+
+  <!-- ======= YOUR ORIGINAL STYLES (untouched) ======= -->
+  <style>
+    /* Original page styling preserved exactly (copied from your file) */
+    body {
+      margin: 0;
+      background: #f6f6f6;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 25px;
+      gap: 40px;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      user-select: none;
+    }
+
+    .body-img {
+      width: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    svg path {
+      fill: transparent;
+      cursor: pointer;
+      transition: fill 0.22s ease, opacity 0.22s ease;
+      pointer-events: auto;
+      opacity: 0;
+    }
+
+    svg path.hovered,
+    svg path.sticky {
+      fill: rgba(255, 40, 0, 0.55);
+      opacity: 1;
+      stroke: rgba(255, 40, 0, 0.55);
+      stroke-width: 1.8;
+    }
+
+    .side-panel {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 150px;
+    }
+
+    .side-panel button {
+      padding: 10px;
+      background: #fff7e6;
+      border: 2px solid #c00000;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.25s;
+      font-weight: 500;
+    }
+
+    .side-panel button:hover {
+      background: #ffe0d4;
+    }
+
+    .gender-buttons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .gender-buttons button {
+      padding: 12px 30px;
+      font-size: 16px;
+      border: 2px solid #c00000;
+      border-radius: 6px;
+      background: #fff7e6;
+      cursor: pointer;
+      transition: 0.25s;
+      font-weight: 600;
+    }
+
+    .gender-buttons button:hover {
+      background: #ffe0d4;
+    }
+  </style>
+
+  <!-- ======= ADDED LAYOUT STYLES (only outer layout; will NOT change your original hover) ======= -->
+  <style>
+    /* Outer 3-column layout: left = buttons, center = your original .main content, right = info box */
+    .wrapper {
+      display: grid;
+      grid-template-columns: 180px 1fr 300px;
+      gap: 20px;
+      width: calc(100% - 80px);
+      max-width: 1200px;
+      margin: 28px auto;
+      align-items: start;
+    }
+
+    /* Keep white-ish page container feel but darker accent for info box */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    /* Make Back button visually prominent */
+    .back-btn {
+      padding: 10px;
+      background: linear-gradient(180deg,#ff6b6b,#ff4747);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255,75,75,0.12);
+    }
+    .back-btn:hover { transform: translateY(-2px); }
+
+    /* Center column will contain your original .main exactly as is (we will not change its children) */
+    .center-column {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Right info box */
+    .info-box {
+      background: linear-gradient(180deg,#0f1724,#111827);
+      color: #e6eef8;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      min-height: 220px;
+      font-family: "Segoe UI", sans-serif;
+    }
+    .info-box h2 { margin: 0 0 8px 0; color: #ff7a7a; font-size: 18px; }
+    .info-box p { margin: 0; color: #d8e6ff; line-height: 1.45; }
+
+    /* Make sure original .main layout keeps its internal layout but ensure side-panel shows on left visually:
+       We do this by reordering .main children with CSS only (no DOM edits). */
+    .main { /* preserve original .main styles (they exist above), but ensure flex order for children */
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .main .container { order: 2; }   /* keep your image + svgs in middle visually */
+    .main .side-panel { order: 1; }  /* your side buttons will be shown on the left within the center area */
+    /* The effect: overall left column contains Back + (center .main which includes side-panel on its left),
+       center column contains the container (image + svgs) visually centered. This preserves your exact markup. */
+
+    /* Small responsive tuning */
+    @media (max-width: 980px) {
+      .wrapper { grid-template-columns: 1fr; padding: 12px; }
+      .left-column { order: 1; }
+      .center-column { order: 2; margin: 0 auto; }
+      .info-box { order: 3; margin-top: 12px; }
+      .main .container, .main .side-panel { order: initial; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Outer wrapper -->
+  <div class="wrapper">
+
+    <!-- LEFT: Back button and (optional) extra controls -->
+    <div class="left-column">
+      <button class="back-btn" onclick="window.open('back.html','_blank')">Back</button>
+      <!-- you can add more left-side quick controls here if needed -->
+    </div>
+
+    <!-- CENTER: we paste your ENTIRE original .main content here UNCHANGED -->
+    <div class="center-column">
+      <!-- ======= BEGIN ORIGINAL CONTENT (exact as you provided) ======= -->
+      <div class="main">
+        <div class="container">
+          <img src="8a3a8fda-0945-4825-b495-99e798317141 - Copy.png" class="body-img" id="bodyImg">
+          <svg class="shoulder-svg" viewBox="0 0 400 820">
+            <path id="leftDeltoid" class="shoulder-shape" d="M285,182.8 
+        C280,152.8 340,172.8 330,232.8
+        C320,237.8 300,232.8 290,202.8 Z" />
+            <path id="rightDeltoid" class="shoulder-shape" d="M117,176.8
+        C120,152.8 60,172.8 70,230.8 
+        C70,237.8 96,232.8 110,202.8 Z" />
+            <path id="leftTrap" class="shoulder-shape" d="M232.5,137.9
+         C227.5,137.9 252.5,153.4 287.5,165.9
+          C205.5,182.9 247.5,159.4 235,170.9 Z" />
+            <path id="rightTrap" class="shoulder-shape" d="M167.5,159.9
+         C172.5,127.9 145.5,153.4 112.5,163.9
+          C110.5,168.9 182.5,169.4 165,172.9 Z" />
+          </svg>
+          <svg class="chest-svg" viewBox="0 0 400 840">
+            <path id="leftChest" class="chest-shape"
+              d="M110,230 Q100,165 200,190 Q205,215 200,230 Q195,250 170,260 Q95,270 122,225 Q290,245 114,245Z" />
+            <path id="rightChest" class="chest-shape"
+              d="M290,230 Q290,165 200,190 Q195,215 200,230 Q205,250 230,260 Q255,269 280,255 Q290,235 287,235Z" />
+          </svg>
+          <svg class="abs-svg" viewBox="0 0 373 840">
+            <path id="L1" class="abs-shape" d="M144,274 C166,254 193,260 178,279
+                    C185,283 180,288 170,291
+                    C139,306 152,295 146,285Z" />
+            <path id="L2" class="abs-shape" d="M150,305 C156,299 188,295 180,297
+                    C190,342 176,320 175,327 
+                    C126,338 152,303 152,306Z" />
+            <path id="L3" class="abs-shape" d="M149,338
+                    C149,331 195,330 180,340
+                    C185,339 185,355 182,360
+                    C133,363 152,350 148,338Z" />
+            <path id="L4" class="abs-shape" d="M148,378
+                     C145,360 172,365 179,369 
+                     C195,540 160,413 161,428
+                      C158,424 160,410 148,379Z" />
+            <path id="R1" class="abs-shape" d="M220,280
+                     C240,263 200,264 190,261
+                      C183,297 192,286 222,300 
+                      C232,297 225,268 220,270Z" />
+            <path id="R2" class="abs-shape" d="M220,305
+                    C206,299 204,295 190,297
+                    C183,344 199,319 215,330
+                    C238,322 217,303 220,305Z" />
+            <path id="R3" class="abs-shape" d="M220,348
+                    C234,340 212,328 190,334
+                    C188,347 193,356 190,358
+                    C240,367 215,360 220,358Z" />
+            <path id="R4" class="abs-shape" d="M224,378 
+                    C220,363 220,369 196,365
+                    C175,543 213,410 210,425
+                    C214,420 220,400 224,378Z" />
+          </svg>
+          <svg class="oblique-svg" viewBox="0 0 400 840">
+            <path id="leftOblique" class="oblique-shape" d="M117,269
+                    C135,340 105,392 148,400 
+                    C160,402 153,382 150,302 
+                    C138,312 168,292 140,265Z" />
+            <path id="rightOblique" class="oblique-shape" d="M267,264
+                    C291,420 269,399 242,406 
+                    C236,400 241,390 246,302
+                    C252,238 232,282 268,264 Z" />
+          </svg>
+          <svg class="leg-svg" viewBox="0 0 400 840">
+            <path id="leftLeg" class="leg-shape" d="M120 390
+         C100,490 100,500 127,595
+         C120,595 185,640 179,590
+         C170,600 195,590 195,475
+         C165,423 150,420 175,437 Z" />
+            <path id="rightLeg" class="leg-shape" d="M280,390
+         C295,400 298,500 271,600
+         C255,619 210,615 210,560
+         C210,450 185,489 230,440
+         C260,395 265,400 225,440 Z" />
+          </svg>
+          <svg class="bicep-svg" viewBox="0 0 400 780">
+            <path id="leftBicep" class="bicep-shape" d="M322,229
+       C330,240 308,270 285,288
+       C255,297 270,270 270,265
+       C279,250 290,235 305,222
+       C310,218 309,223 317,223 Z" transform="translate(0,5) rotate(130 300 255)" />
+            <path id="rightBicep" class="bicep-shape" d="M79,221
+       C75,245 82,265 105,291
+       C118,302 126,290 127,275
+       C114,255 115,245 99,227
+       C90,210 69,220 85,225 Z" transform="rotate(40 100 250)" />
+          </svg>
+          <svg class="forearm-svg" viewBox="0 0 400 750">
+            <path id="rightForearm" class="forearm-shape" d="M25.5,320
+       C20.5,335 63.5,365 80.5,370
+       C97.5,355 102.5,380 109.5,365
+       C105.5,349 99.5,337 85.5,325
+       C67.5,299 60.5,318 47.5,320 Z" transform="rotate(60 87.5 340)" />
+            <path id="leftForearm" class="forearm-shape" d="M362.5,333
+       C360.5,340 360.5,353 344.5,365
+       C312.5,392 347.5,353 296.5,353
+       C302.5,338 320.5,330 339.5,316
+       C352.5,303 359.5,311 362.5,313 Z" transform="rotate(120 332.5 333)" />
+          </svg>
+        </div>
+        <div class="side-panel">
+          <button onclick="window.open('shoulder.html','_blank')">Shoulder</button>
+          <button onclick="window.open('chest.html','_blank')">Chest</button>
+          <button onclick="window.open('triceps.html','_blank')">Triceps</button>
+          <button onclick="window.open('abs.html','_blank')">Abs</button>
+          <button onclick="window.open('oblique.html','_blank')">Oblique</button>
+          <button onclick="window.open('biceps.html','_blank')">Biceps</button>
+          <button onclick="window.open('forearm.html','_blank')">Forearms</button>
+          <button onclick="window.open('legs.html','_blank')">Legs</button>
+        </div>
+      </div>
+
+      <div class="gender-buttons">
+        <button onclick="window.open('male.html','_blank')">Male</button>
+        <button onclick="window.open('female.html','_blank')">Female</button>
+      </div>
+      <!-- ======= END ORIGINAL CONTENT ======= -->
+    </div>
+
+    <!-- RIGHT: info box (added) -->
+    <div class="info-box" id="infoBox">
+      <h2>Hover a muscle</h2>
+      <p>Move your mouse over any body part to see its name and a short description.</p>
+    </div>
+  </div>
+
+  <!-- ======= ORIGINAL SCRIPTS (untouched) ======= -->
+  <script>
+    const shoulders = [
+      document.getElementById('leftDeltoid'),
+      document.getElementById('rightDeltoid'),
+      document.getElementById('leftTrap'),
+      document.getElementById('rightTrap')
+    ];
+    function hoverShoulder(on) {
+      shoulders.forEach(s => s.classList.toggle('hovered', on));
+    }
+    shoulders.forEach(s => {
+      s.addEventListener('mouseenter', () => hoverShoulder(true));
+      s.addEventListener('mouseleave', () => hoverShoulder(false));
+      s.addEventListener('click', () => window.open('shoulder.html', '_blank'));
+    });
+    const chestParts = [document.getElementById('leftChest'), document.getElementById('rightChest')];
+    function hoverChest(on) { chestParts.forEach(c => c.classList.toggle('hovered', on)); }
+    chestParts.forEach(c => {
+      c.addEventListener('mouseenter', () => hoverChest(true));
+      c.addEventListener('mouseleave', () => hoverChest(false));
+      c.addEventListener('click', () => window.open('chest.html', '_blank'));
+    });
+    const absIds = ['L1', 'L2', 'L3', 'L4', 'R1', 'R2', 'R3', 'R4'];
+    const absParts = absIds.map(id => document.getElementById(id));
+    function hoverAbs(on) { absParts.forEach(a => a.classList.toggle('hovered', on)); }
+    absParts.forEach(a => {
+      a.addEventListener('mouseenter', () => hoverAbs(true));
+      a.addEventListener('mouseleave', () => hoverAbs(false));
+      a.addEventListener('click', () => window.open('abs.html', '_blank'));
+    });
+    const obliqueParts = [document.getElementById('leftOblique'), document.getElementById('rightOblique')];
+    function hoverOblique(on) { obliqueParts.forEach(o => o.classList.toggle('hovered', on)); }
+    obliqueParts.forEach(o => {
+      o.addEventListener('mouseenter', () => hoverOblique(true));
+      o.addEventListener('mouseleave', () => hoverOblique(false));
+      o.addEventListener('click', () => window.open('oblique.html', '_blank'));
+    });
+    const legParts = [document.getElementById('leftLeg'), document.getElementById('rightLeg')];
+    function hoverLeg(on) { legParts.forEach(l => l.classList.toggle('hovered', on)); }
+    legParts.forEach(l => {
+      l.addEventListener('mouseenter', () => hoverLeg(true));
+      l.addEventListener('mouseleave', () => hoverLeg(false));
+      l.addEventListener('click', () => window.open('legs.html', '_blank'));
+    });
+    const biceps = [document.getElementById('leftBicep'), document.getElementById('rightBicep')];
+    function hoverBicep(on) { biceps.forEach(b => b.classList.toggle('hovered', on)); }
+    biceps.forEach(b => {
+      b.addEventListener('mouseenter', () => hoverBicep(true));
+      b.addEventListener('mouseleave', () => hoverBicep(false));
+      b.addEventListener('click', () => window.open('biceps.html', '_blank'));
+    });
+    const forearms = [document.getElementById('leftForearm'), document.getElementById('rightForearm')];
+    function hoverForearm(on) { forearms.forEach(f => f.classList.toggle('hovered', on)); }
+    forearms.forEach(f => {
+      f.addEventListener('mouseenter', () => hoverForearm(true));
+      f.addEventListener('mouseleave', () => hoverForearm(false));
+      f.addEventListener('click', () => window.open('forearm.html', '_blank'));
+    });
+  </script>
+
+  <!-- ======= ADDED INFOBOX SCRIPT (non-invasive) ======= -->
+  <script>
+    // This script only listens to the same svg paths and updates the right info box.
+    // It does NOT remove or change any of your existing listeners or classes.
+
+    const infoBox = document.getElementById('infoBox');
+
+    const muscleInfo = {
+      leftDeltoid: {name: "Left Deltoid", text: "Deltoid — lifts and rotates the arm; active in presses and raises."},
+      rightDeltoid: {name: "Right Deltoid", text: "Deltoid — lifts and rotates the arm; active in presses and raises."},
+      leftTrap: {name: "Left Trapezius", text: "Trapezius — supports neck/shoulder movement and stabilizes the scapula."},
+      rightTrap: {name: "Right Trapezius", text: "Trapezius — supports neck/shoulder movement and stabilizes the scapula."},
+      leftChest: {name: "Left Pectoralis Major", text: "Pectoralis major — primary pushing muscle, helps adduct and rotate the arm."},
+      rightChest: {name: "Right Pectoralis Major", text: "Pectoralis major — primary pushing muscle, helps adduct and rotate the arm."},
+      L1: {name: "Upper Abs (L1)", text: "Upper rectus abdominis — trunk flexion and core stabilization."},
+      L2: {name: "Abs (L2)", text: "Rectus abdominis — supports bending and torsion movements."},
+      L3: {name: "Abs (L3)", text: "Rectus abdominis — supports bending and torsion movements."},
+      L4: {name: "Lower Abs (L4)", text: "Lower rectus abdominis — controls pelvis and lower core stability."},
+      R1: {name: "Upper Abs (R1)", text: "Upper rectus abdominis — trunk flexion and stability."},
+      R2: {name: "Abs (R2)", text: "Rectus abdominis — core movements and stabilization."},
+      R3: {name: "Abs (R3)", text: "Rectus abdominis — core movements and stabilization."},
+      R4: {name: "Lower Abs (R4)", text: "Lower rectus abdominis — helps with leg-raise actions and pelvis control."},
+      leftOblique: {name: "Left Oblique", text: "External oblique — side-bending and rotation of the torso."},
+      rightOblique: {name: "Right Oblique", text: "External oblique — side-bending and rotation of the torso."},
+      leftBicep: {name: "Left Bicep", text: "Biceps brachii — elbow flexion and forearm supination."},
+      rightBicep: {name: "Right Bicep", text: "Biceps brachii — elbow flexion and forearm supination."},
+      leftForearm: {name: "Left Forearm", text: "Forearm muscles — control wrist and finger movement, grip strength."},
+      rightForearm: {name: "Right Forearm", text: "Forearm muscles — control wrist and finger movement, grip strength."},
+      leftLeg: {name: "Left Leg", text: "Leg muscles (quads/hamstrings/calves) — support locomotion and power."},
+      rightLeg: {name: "Right Leg", text: "Leg muscles (quads/hamstrings/calves) — support locomotion and power."}
+    };
+
+    // Attach non-intrusive listeners to svg paths:
+    document.querySelectorAll('svg path').forEach(p => {
+      p.addEventListener('mouseenter', () => {
+        const id = p.id;
+        if (muscleInfo[id]) {
+          infoBox.innerHTML = `<h2>${muscleInfo[id].name}</h2><p>${muscleInfo[id].text}</p>`;
+        }
+      });
+      // We keep the default text on leave (so the info box clears)
+      p.addEventListener('mouseleave', () => {
+        infoBox.innerHTML = `<h2>Hover a muscle</h2><p>Move your mouse over any body part to see its name and a short description.</p>`;
+      });
+    });
+  </script>
+</body>
+</html>

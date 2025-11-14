@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Female Back Muscles Interactive Trainer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --muted:#d7d7d7;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:#fff;
+      font-family:"Segoe UI",system-ui,Roboto,Arial;
+    }
+
+    /* Navbar */
+    .navbar{
+      background:#101010;
+      border-bottom:1px solid #181818;
+      box-shadow:0 4px 20px var(--shadow);
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+    .navbar .inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo{
+      color:var(--accent);
+      font-weight:700;
+      font-size:20px;
+      letter-spacing:0.7px;
+    }
+    .nav-links{
+      display:flex;
+      gap:22px;
+      align-items:center;
+    }
+    .nav-links a{
+      position:relative;
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+      padding:6px 2px;
+      transition:color .2s;
+    }
+    .nav-links a:hover{
+      color:var(--accent);
+    }
+    .nav-links a:hover::after{
+      content:"";
+      position:absolute;
+      bottom:-4px;
+      left:0;
+      width:100%;
+      height:2px;
+      background:var(--accent);
+      border-radius:2px;
+    }
+
+    /* Muscle Buttons Row (top) */
+    .muscle-top{
+      background:#0f0f0f;
+      border-bottom:1px solid #141414;
+      box-shadow:0 2px 10px rgba(255,60,60,0.05);
+    }
+    .muscle-top .inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 22px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .muscle-top button{
+      flex:1;
+      min-width:100px;
+      text-align:center;
+      background:linear-gradient(145deg, #141414, #1b1b1b);
+      border:1px solid var(--accent);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      letter-spacing:0.4px;
+      transition:all .3s ease;
+      box-shadow:0 0 10px rgba(255,60,60,0.1);
+    }
+    .muscle-top button:hover{
+      background:linear-gradient(145deg, var(--accent), #ff6060);
+      transform:translateY(-4px) scale(1.05);
+      box-shadow:0 8px 25px var(--glow);
+    }
+
+    /* Main Layout */
+    .main{
+      max-width:1100px;
+      margin:36px auto;
+      padding:0 18px;
+      display:flex;
+      gap:40px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    /* Inputs Column (left) */
+    .inputs-column{
+      width:180px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .inputs-column label{
+      color:var(--muted);
+      font-size:15px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,60,60,0.2);
+      border-radius:10px;
+      padding:10px 14px;
+      backdrop-filter:blur(6px);
+    }
+    .inputs-column input{
+      width:70px;
+      background:#0b0b0b;
+      color:#fff;
+      border:none;
+      border-bottom:2px solid var(--accent);
+      padding:6px 8px;
+      border-radius:4px;
+      font-size:14px;
+      text-align:center;
+      outline:none;
+      transition:border .2s;
+    }
+    .inputs-column input:focus{
+      border-color:#ff5555;
+    }
+    .inputs-column button{
+      padding:8px 12px;
+      border-radius:8px;
+      border:none;
+      background:#ff3b3b;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.2s;
+    }
+    .inputs-column button:hover{
+      background:#ff5555;
+    }
+
+    /* Front Side button in sidebar */
+    .inputs-column .front-btn{
+      display:block;
+      text-align:center;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+      transition:all .3s ease;
+      box-shadow:0 0 10px rgba(255,60,60,0.15);
+      margin-top:6px;
+      text-decoration:none;
+    }
+    .inputs-column .front-btn:hover{
+      background:linear-gradient(145deg,#ff6060,var(--accent));
+      transform:translateY(-3px) scale(1.03);
+      box-shadow:0 6px 20px var(--glow);
+    }
+
+    /* Body Image Container */
+    .container{
+      position:relative;
+      width:420px;
+      user-select:none;
+    }
+    .body-img{
+      width:100%;
+      display:block;
+      pointer-events:none;
+      border-radius:10px;
+      box-shadow:0 10px 35px rgba(255,60,60,0.12);
+    }
+
+    .container svg{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+    }
+
+    svg path{
+      fill:transparent;
+      pointer-events:auto;
+      cursor:pointer;
+      transition:fill .22s ease, opacity .22s ease;
+      opacity:0;
+    }
+    svg path.hovered{
+      fill:rgba(255,60,60,0.55);
+      opacity:1;
+      stroke:rgba(255,60,60,0.75);
+      stroke-width:1.6;
+    }
+
+    /* Info Box */
+    .info-box{
+      width:360px;
+      min-height:280px;
+      background:radial-gradient(circle at top left, #151515 0%, #101010 100%);
+      border-radius:14px;
+      padding:22px 20px;
+      border:1px solid var(--accent);
+      box-shadow:0 0 25px var(--shadow), 0 0 10px rgba(255,60,60,0.08);
+      backdrop-filter:blur(6px);
+    }
+    .info-box h2{
+      color:var(--accent);
+      font-size:20px;
+      margin:0 0 10px;
+      text-shadow:0 0 6px rgba(255,60,60,0.25);
+    }
+    .info-box p{
+      color:#e7e7e7;
+      line-height:1.55;
+      font-size:15px;
+      margin:0;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .main{flex-direction:column;align-items:center;gap:24px;}
+      .inputs-column{width:100%;max-width:320px;flex-direction:row;flex-wrap:wrap;justify-content:center;}
+      .container{width:320px;}
+      .info-box{width:100%;max-width:420px;}
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="inner">
+    <div class="logo">Muscle Trainer</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Support</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Muscle Buttons at Top -->
+<div class="muscle-top">
+  <div class="inner">
+    <button data-part="lats">Lats</button>
+    <button data-part="calves">Calves</button>
+    <button data-part="hamquads">Quad</button>
+    <button data-part="trap">Trap</button>
+    <button data-part="lowerback">LowerBack</button>
+    <button data-part="triceps">Triceps</button>
+  </div>
+</div>
+
+<main class="main">
+  <!-- LEFT INPUTS COLUMN -->
+  <aside class="inputs-column">
+    <label>Age: <input id="age" type="number" placeholder="yrs" /></label>
+    <label>Height: <input id="height" type="number" placeholder="cm" /></label>
+    <label>Weight: <input id="weight" type="number" placeholder="kg" /></label>
+    <button id="confirmBtn">Confirm</button>
+    <a class="front-btn" href="front.html" target="_blank">Front Side</a>
+  </aside>
+
+  <!-- BODY IMAGE -->
+  <section class="container">
+    <img id="bodyImg" class="body-img" src="girl back.png" alt="female back" />
+
+    <!-- SVGs -->
+    <svg viewBox="0 0 400 540">
+      <path id="leftTrap" d="M170,65 C175,82 175,137 197,147 C199,82 187,115 195,120 C195,60 198,70 189,68Z" />
+      <path id="rightTrap" d="M228,65 C223,82 223,137 201,147 C199,82 211,115 203,120 C203,60 200,70 209,68Z" />
+    </svg>
+
+    <svg viewBox="0 0 400 690">
+      <path id="leftTriceps" d="M130,193 C105,200 115,299 135,265 C145,240 150,230 140,200 Z" />
+      <path id="rightTriceps" d="M270,193 C295,200 285,299 265,265 C255,240 255,230 260,200 Z" />
+    </svg>
+
+    <svg viewBox="0 0 400 969">
+      <path id="leftCalf" d="M143,700 C105,790 145,790 140,787 C200,805 185,770 180,703Z" />
+      <path id="rightCalf" d="M221,705 C215,740 203,779 229,790 C278,797 288,790 261,702Z" />
+    </svg>
+
+    <svg viewBox="0 0 400 800">
+      <path id="leftHamQuad" d="M125,448 C130,488 150,568 180,540 C193,520 190,538 197,435 Z" />
+      <path id="rightHamQuad" d="M275,448 C280,488 250,568 220,540 C207,520 210,538 203,435 Z" />
+    </svg>
+
+    <svg viewBox="0 0 450 620">
+      <path id="leftLat" d="M110,131 C120,140 123,200 134,230 C125,230 130,290 169,200 C175,190 155,150 140,105Z" transform="translate(45,0)" />
+      <path id="rightLat" d="M293,131 C290,140 280,200 269,230 C278,230 273,290 234,200 C228,190 248,150 263,105Z" transform="translate(-1,0)" />
+    </svg>
+
+    <svg viewBox="0 0 400 860">
+      <path id="leftLowerBack" d="M197,300 C170,365 187,345 169,365 C180,375 189,385 197,405 C203,345 197,325 198,305Z" />
+      <path id="rightLowerBack" d="M203,300 C230,365 213,345 231,365 C220,375 211,385 203,405 C197,345 203,325 202,305Z" />
+    </svg>
+  </section>
+
+  <!-- INFO BOX -->
+  <aside class="info-box" id="infoBox">
+    <h2>Hover the muscles</h2>
+    <p>Move your mouse over the muscles to learn about them.</p>
+  </aside>
+</main>
+
+<script>
+const infoBox=document.getElementById('infoBox');
+const leftTrap=document.getElementById('leftTrap');
+const rightTrap=document.getElementById('rightTrap');
+const leftTriceps=document.getElementById('leftTriceps');
+const rightTriceps=document.getElementById('rightTriceps');
+const leftCalf=document.getElementById('leftCalf');
+const rightCalf=document.getElementById('rightCalf');
+const leftHamQuad=document.getElementById('leftHamQuad');
+const rightHamQuad=document.getElementById('rightHamQuad');
+const leftLat=document.getElementById('leftLat');
+const rightLat=document.getElementById('rightLat');
+const leftLowerBack=document.getElementById('leftLowerBack');
+const rightLowerBack=document.getElementById('rightLowerBack');
+
+function hoverOff(){
+  [leftTrap,rightTrap,leftTriceps,rightTriceps,leftCalf,rightCalf,leftHamQuad,rightHamQuad,leftLat,rightLat,leftLowerBack,rightLowerBack]
+  .forEach(p=>p.classList.remove('hovered'));
+  infoBox.innerHTML=`<h2>Hover the muscles</h2><p>Move your mouse over the muscles to learn about them.</p>`;
+}
+
+function hoverTrap(){ leftTrap.classList.add('hovered'); rightTrap.classList.add('hovered'); infoBox.innerHTML=`<h2>Trapezius</h2><p>The trapezius spans the upper and mid-back.</p>`;}
+function hoverTriceps(){ leftTriceps.classList.add('hovered'); rightTriceps.classList.add('hovered'); infoBox.innerHTML=`<h2>Triceps</h2><p>The triceps extend the elbow.</p>`;}
+function hoverCalves(){ leftCalf.classList.add('hovered'); rightCalf.classList.add('hovered'); infoBox.innerHTML=`<h2>Calves</h2><p>Important for walking and running.</p>`;}
+function hoverHamQuads(){ leftHamQuad.classList.add('hovered'); rightHamQuad.classList.add('hovered'); infoBox.innerHTML=`<h2>Hamstrings & Quads</h2><p>Used for knee and hip movement.</p>`;}
+function hoverLats(){ leftLat.classList.add('hovered'); rightLat.classList.add('hovered'); infoBox.innerHTML=`<h2>Lats</h2><p>Pulling and lifting muscles.</p>`;}
+function hoverLowerBack(){ leftLowerBack.classList.add('hovered'); rightLowerBack.classList.add('hovered'); infoBox.innerHTML=`<h2>Lower Back</h2><p>Supports posture and lifting.</p>`;}
+
+const addHover=(els,fn)=>els.forEach(el=>{el.addEventListener('mouseenter',fn); el.addEventListener('mouseleave',hoverOff);});
+addHover([leftTrap,rightTrap],hoverTrap);
+addHover([leftTriceps,rightTriceps],hoverTriceps);
+addHover([leftCalf,rightCalf],hoverCalves);
+addHover([leftHamQuad,rightHamQuad],hoverHamQuads);
+addHover([leftLat,rightLat],hoverLats);
+addHover([leftLowerBack,rightLowerBack],hoverLowerBack);
+
+document.querySelectorAll(".muscle-top button").forEach(btn => {
+  btn.addEventListener("mouseenter", () => {
+    const part = btn.dataset.part; hoverOff();
+    if(part === "trap") hoverTrap();
+    if(part === "triceps") hoverTriceps();
+    if(part === "calves") hoverCalves();
+    if(part === "hamquads") hoverHamQuads();
+    if(part === "lats") hoverLats();
+    if(part === "lowerback") hoverLowerBack();
+  });
+  btn.addEventListener("mouseleave", hoverOff);
+});
+
+let userData = null;
+document.getElementById('confirmBtn').addEventListener('click', () => {
+  const age = parseInt(document.getElementById('age').value);
+  const height = parseInt(document.getElementById('height').value);
+  const weight = parseInt(document.getElementById('weight').value);
+  if (!age || !height || !weight) { alert("Please enter valid Age, Height, and Weight."); return; }
+  userData = { age, height, weight };
+  alert("Data confirmed! Now click a muscle to see exercises.");
+});
+
+function getExerciseLevel(age){
+  if(age <= 14) return {difficulty:"easy", sets:2, reps:10};
+  else if(age <= 20) return {difficulty:"medium", sets:3, reps:12};
+  else return {difficulty:"hard", sets:4, reps:15};
+}
+function openMusclePage(page){
+  if(!userData){ alert("Please confirm Age, Height, Weight first!"); return; }
+  const level = getExerciseLevel(userData.age);
+  window.open(`${page}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}`, "_blank");
+}
+
+[leftTrap,rightTrap].forEach(el => el.onclick = ()=>openMusclePage('trap f.html'));
+[leftTriceps,rightTriceps].forEach(el => el.onclick = ()=>openMusclePage('triceps f.html'));
+[leftCalf,rightCalf].forEach(el => el.onclick = ()=>openMusclePage('calves f.html'));
+[leftHamQuad,rightHamQuad].forEach(el => el.onclick = ()=>openMusclePage('hamquads f.html'));
+[leftLat,rightLat].forEach(el => el.onclick = ()=>openMusclePage('lats f.html'));
+[leftLowerBack,rightLowerBack].forEach(el => el.onclick = ()=>openMusclePage('lowerback f.html'));
+document.querySelectorAll('.muscle-top button').forEach(btn=>{ btn.addEventListener('click',()=>{ openMusclePage(btn.dataset.part+" f.html"); }); });
+</script>
+
+</body>
+</html>
