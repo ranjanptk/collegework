@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calves Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+    body{
+      margin:0;
+      font-family:"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:#fff;
+      font-size:16px;
+    }
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      padding:20px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow:0 0 25px var(--shadow);
+      position:relative;
+    }
+    h1{
+      color:var(--accent);
+      text-align:center;
+      margin-bottom:20px;
+      text-shadow:0 0 6px var(--glow);
+      font-size:26px;
+    }
+    .exercise-row{
+      display:flex;
+      gap:20px;
+      margin-bottom:30px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .exercise-text{
+      flex:1;
+      min-width:250px;
+    }
+    .exercise-text h2{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .exercise-text p{
+      margin:0 0 10px 0;
+      font-size:16px;
+      color:#ddd;
+      line-height:1.5;
+    }
+    .exercise-img{
+      flex:1;
+      min-width:250px;
+      text-align:center;
+    }
+    .exercise-img img{
+      width:100%;
+      max-height:300px;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .back-btn{
+      display:inline-block;
+      position:absolute;
+      top:20px;
+      left:20px;
+      padding:10px 14px;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:10px;
+      box-shadow:0 6px 20px var(--glow);
+      transition:transform .2s, box-shadow .2s;
+      z-index:10;
+    }
+    .back-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 28px var(--glow);
+    }
+    .user-info{
+      margin:0 0 20px 0;
+      background:rgba(255,60,60,0.05);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      font-size:16px;
+      color:#fff;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .user-info strong{
+      color:var(--accent);
+    }
+    @media (max-width:700px){
+      .exercise-row{
+        flex-direction:column;
+      }
+      .exercise-img{
+        order:-1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-btn" href="female back.html">← Back to Body</a>
+
+    <div class="user-info" id="user-info">
+      Loading your data...
+    </div>
+
+    <h1>Calves Exercises</h1>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Standing Calf Raise</h2>
+        <p id="exercise1">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Stand on a raised platform or step with your heels hanging off. Push through the balls of your feet to lift your body, then slowly lower back down.</p>
+        <p><strong>Benefits:</strong> Strengthens gastrocnemius and soleus muscles, improves ankle stability, enhances jump power and balance.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="standing-calf-raise.gif" alt="Standing Calf Raise">
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Seated Calf Raise</h2>
+        <p id="exercise2">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Sit on a bench with feet on the platform, place weight on your knees. Raise your heels as high as possible, pause, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Targets soleus muscle, improves lower leg endurance, enhances posture and walking efficiency.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="seated-calf-raise.gif" alt="Seated Calf Raise">
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Jump Rope Calf Raises</h2>
+        <p id="exercise3">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold a jump rope and jump continuously on your toes. Focus on pushing through the balls of your feet with each jump, keeping your knees slightly bent.</p>
+        <p><strong>Benefits:</strong> Strengthens gastrocnemius and soleus, enhances calf endurance, improves coordination, and boosts cardiovascular fitness.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="jump-rope.gif" alt="Jump Rope Calf Raises">
+      </div>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Smith Machine Calf Raise</h2>
+        <p id="exercise4">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Position yourself under the Smith machine bar with the balls of your feet on a raised platform. Press through your toes to lift the bar, pause at the top, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Provides heavy-load calf strengthening, improves muscle definition, and allows controlled movement for safety and progressive overload.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="smith-machine-calf.gif" alt="Smith Machine Calf Raise">
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Box Jump Calf Push</h2>
+        <p id="exercise5">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Stand in front of a low box or platform. Jump onto it using primarily calf power, land softly, and step back down. Repeat for reps.</p>
+        <p><strong>Benefits:</strong> Develops explosive calf power, strengthens lower leg muscles, and improves vertical jump height.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="box-jump-calf.gif" alt="Box Jump Calf Push">
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get('difficulty') || 'medium';
+  const sets = params.get('sets') || '3';
+  const reps = params.get('reps') || '12';
+  const height = params.get('height') || 'N/A';
+  const weight = params.get('weight') || 'N/A';
+  const age = params.get('age') || 'N/A';
+
+  const userInfo = document.getElementById('user-info');
+  userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
+
+  const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
+  exercises.forEach((id) => {
+    const p = document.getElementById(id);
+    p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
+  });
+</script>
+</body>
+</html>
