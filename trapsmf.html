@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traps Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+    body{
+      margin:0;
+      font-family:"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:#fff;
+      font-size:16px;
+    }
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      padding:20px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow:0 0 25px var(--shadow);
+      position:relative;
+    }
+    h1{
+      color:var(--accent);
+      text-align:center;
+      margin-bottom:20px;
+      text-shadow:0 0 6px var(--glow);
+      font-size:26px;
+    }
+    .exercise-row{
+      display:flex;
+      gap:20px;
+      margin-bottom:30px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .exercise-text{
+      flex:1;
+      min-width:250px;
+    }
+    .exercise-text h2{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .exercise-text p{
+      margin:0 0 10px 0;
+      font-size:16px;
+      color:#ddd;
+      line-height:1.5;
+    }
+    .exercise-img{
+      flex:1;
+      min-width:250px;
+      text-align:center;
+    }
+    .exercise-img img{
+      width:100%;
+      max-height:300px;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .back-btn{
+      display:inline-block;
+      position:absolute;
+      top:20px;
+      left:20px;
+      padding:10px 14px;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:10px;
+      box-shadow:0 6px 20px var(--glow);
+      transition:transform .2s, box-shadow .2s;
+      z-index:10;
+    }
+    .back-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 28px var(--glow);
+    }
+    .user-info{
+      margin:0 0 20px 0;
+      background:rgba(255,60,60,0.05);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      font-size:16px;
+      color:#fff;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .user-info strong{
+      color:var(--accent);
+    }
+    @media (max-width:700px){
+      .exercise-row{
+        flex-direction:column;
+      }
+      .exercise-img{
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-btn" href="male back.html">← Back to Body</a>
+    <div class="user-info" id="user-info">
+      Loading your data...
+    </div>
+
+    <h1>Trapezius Exercises</h1>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Barbell Shrugs</h2>
+        <p id="exercise1">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold a barbell in front of thighs, shrug shoulders straight up, pause, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds upper traps, improves posture and neck support, enhances overall shoulder aesthetics.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="https://cdn.discordapp.com/attachments/1437374971427950718/1439224876689789170/behind-the-back-shrugs.gif?ex=6919be1e&is=69186c9e&hm=6e996a42d53e5bf371983d10a91dee1658979232eae8c4775eb758c5af3fedae&" alt="Barbell Shrugs">
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Dumbbell Shrugs</h2>
+        <p id="exercise2">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold dumbbells at your sides, shrug shoulders upward, hold, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Isolates traps, increases shoulder width, and balances symmetry with other upper body muscles.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="https://cdn.discordapp.com/attachments/1437374971427950718/1439224877096767540/dumbbell-shrug.gif?ex=6919be1e&is=69186c9e&hm=27241a9a276d16952b3159ab8bd18e21cb556ddcd8d2edcee1705ee047bfc59d&" alt="Dumbbell Shrugs">
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Face Pulls (Cable)</h2>
+        <p id="exercise3">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Attach rope to cable at face level, pull towards face while flaring elbows, then slowly release.</p>
+        <p><strong>Benefits:</strong> Strengthens rear delts and traps, improves posture and shoulder stability.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="https://www.inspireusafoundation.org/file/2022/03/cable-face-pull.gif" alt="Face Pulls">
+      </div>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Upright Rows (Barbell or Dumbbell)</h2>
+        <p id="exercise4">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold barbell/dumbbells in front, lift straight up to collarbone while keeping elbows high, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds traps and medial delts, improves shoulder definition and strength.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="https://fitnessprogramer.com/wp-content/uploads/2021/04/Dumbbell-Upright-Row.gif" alt="Upright Rows">
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Farmer's Carry Shrugs</h2>
+        <p id="exercise5">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold heavy dumbbells or kettlebells at your sides, shrug your shoulders upward, then walk forward for a few steps while keeping shoulders elevated. Lower and repeat.</p>
+        <p><strong>Benefits:</strong> Builds upper traps, improves grip strength, enhances shoulder stability, and develops functional strength for daily activities.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="https://fitnessprogramer.com/wp-content/uploads/2022/02/Farmers-walk_Cardio.gif" alt="Farmer's Carry Shrugs">
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get('difficulty') || 'medium';
+  const sets = params.get('sets') || '3';
+  const reps = params.get('reps') || '12';
+  const height = params.get('height') || 'N/A';
+  const weight = params.get('weight') || 'N/A';
+  const age = params.get('age') || 'N/A';
+
+  const userInfo = document.getElementById('user-info');
+  userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
+
+  const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
+  exercises.forEach((id) => {
+    const p = document.getElementById(id);
+    p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
+  });
+</script>
+</body>
+</html>
