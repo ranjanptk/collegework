@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerFit Gym Registration</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  body { background-image:url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba'); background-size:cover; background-position:center; background-attachment:fixed; color:white; }
+  
+  .overlay { background: rgba(0,0,0,0.7); width:100%; min-height:100vh; padding:50px 20px; display:flex; justify-content:center; align-items:center; }
+  
+  .registration-form { background:#1a1a1a; padding:40px; border-radius:16px; width:100%; max-width:500px; box-shadow:0 0 20px rgba(255,59,59,0.5); }
+  .registration-form h2 { text-align:center; margin-bottom:30px; color:#ff3b3b; }
+  .registration-form label { display:block; margin-bottom:8px; margin-top:15px; font-weight:bold; }
+  .registration-form input, .registration-form textarea, .registration-form select { width:100%; padding:10px; border-radius:8px; border:none; font-size:16px; }
+  .registration-form textarea { resize:none; }
+  .registration-form button { margin-top:20px; width:100%; padding:12px; border:none; border-radius:8px; background:#ff3b3b; font-weight:bold; font-size:18px; color:white; cursor:pointer; transition:0.3s; }
+  .registration-form button:hover { background:#ff5b5b; transform:scale(1.05); }
+  
+  .return-btn { background:#555; margin-top:10px; }
+  .return-btn:hover { background:#777; }
+
+  @media(max-width:500px){ .registration-form { padding:20px; } }
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <form class="registration-form">
+    <h2>PowerFit Gym Registration</h2>
+    
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname" placeholder="Enter First Name" required>
+
+    <label for="lastname">Last Name</label>
+    <input type="text" id="lastname" placeholder="Enter Last Name" required>
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter Email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" placeholder="Enter Phone Number" required>
+
+    <label for="membership">Membership Plan</label>
+    <select id="membership">
+      <option value="Basic Plan">Basic Plan</option>
+      <option value="Standard Plan">Standard Plan</option>
+      <option value="Premium Plan">Premium Plan</option>
+      <option value="Elite Plan">Elite Plan</option>
+    </select>
+
+    <label for="payment">Payment Method</label>
+    <textarea id="payment" rows="4" placeholder="Payment method is only via PhonePe. Drop your payment screenshot here."></textarea>
+
+    <button type="submit">Submit Registration</button>
+    <button type="button" class="return-btn" onclick="window.location.href='index.html'">Return to Home</button>
+  </form>
+</div>
+
+</body>
+</html>
