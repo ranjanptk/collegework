@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Female Front Muscles Interactive Trainer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+:root {
+  --bg: #0b0b0b;
+  --panel: #121212;
+  --muted: #d7d7d7;
+  --accent: #ff3b3b;
+  --shadow: rgba(255,60,60,0.14);
+  --glow: rgba(255,60,60,0.25);
+}
+html, body { height:100%; margin:0; background:var(--bg); color:#fff; font-family:"Segoe UI", system-ui, Roboto, Arial; }
+
+.navbar { background:#101010; border-bottom:1px solid #181818; box-shadow:0 4px 20px var(--shadow); position:sticky; top:0; z-index:20; }
+.navbar .inner { max-width:1100px; margin:0 auto; padding:14px 22px; display:flex; align-items:center; justify-content:space-between; }
+.logo { color:var(--accent); font-weight:700; font-size:20px; letter-spacing:0.7px; }
+.nav-links { display:flex; gap:22px; align-items:center; }
+.nav-links a { position:relative; color:#fff; text-decoration:none; font-weight:500; padding:6px 2px; transition: color .2s; }
+.nav-links a:hover { color:var(--accent); }
+.nav-links a:hover::after { content:""; position:absolute; bottom:-4px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+
+.muscle-top { background:#0f0f0f; border-bottom:1px solid #141414; box-shadow:0 2px 10px rgba(255,60,60,0.05); }
+.muscle-top .inner { max-width:1100px; margin:0 auto; padding:14px 22px; display:flex; gap:16px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.muscle-top button { flex:1; min-width:100px; text-align:center; background:linear-gradient(145deg,#141414,#1b1b1b); border:1px solid var(--accent); color:#fff; padding:12px 16px; border-radius:12px; cursor:pointer; font-size:15px; font-weight:600; letter-spacing:.4px; transition: all .3s ease; box-shadow:0 0 10px rgba(255,60,60,0.1); }
+.muscle-top button:hover { background:linear-gradient(145deg,var(--accent),#ff6060); transform:translateY(-4px) scale(1.05); box-shadow:0 8px 25px var(--glow); }
+
+.wrapper { display:grid; grid-template-columns:180px 1fr 340px; gap:20px; width:calc(100% - 64px); max-width:1300px; margin:28px auto; align-items:start; }
+.left-column { display:flex; flex-direction:column; gap:12px; }
+.back-btn { padding:10px; background:linear-gradient(180deg,#ff6b6b,#ff4747); color:#fff; border:none; border-radius:8px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(255,75,75,0.12); }
+.back-btn:hover { transform:translateY(-2px); }
+.inputs-column label { color:var(--muted); font-size:15px; display:flex; gap:10px; align-items:center; background: rgba(255,255,255,0.03); border:1px solid rgba(255,60,60,0.12); border-radius:10px; padding:10px 12px; }
+.inputs-column input { width:80px; background:#0b0b0b; color:#fff; border:none; border-bottom:2px solid var(--accent); padding:6px 8px; border-radius:4px; text-align:center; }
+.inputs-column button { margin-top:6px; padding:10px; border-radius:8px; border:none; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; }
+
+.center-column { display:flex; justify-content:center; position:relative; }
+.container { position:relative; width:440px; user-select:none; }
+.body-img { width:100%; display:block; border-radius:10px; box-shadow:0 10px 35px rgba(255,60,60,0.12); pointer-events:none; }
+
+.muscle-svg { position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; }
+.muscle-svg path { fill: transparent; pointer-events: auto; cursor:pointer; transition: fill .22s ease, opacity .22s ease; opacity:0; }
+.muscle-svg path.hovered { fill: rgba(255,60,60,0.55); opacity:1; stroke: rgba(255,60,60,0.75); stroke-width:1.6; }
+
+.info-box { background: radial-gradient(circle at top left,#0f1724 0%, #0b1220 100%); color:#e6eef8; border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(2,6,23,0.6); min-height:240px; font-family:"Segoe UI",sans-serif; }
+.info-box h2 { margin:0 0 8px 0; color:#ff7a7a; font-size:18px; }
+.info-box p { margin:0; color:#d8e6ff; line-height:1.55; font-size:15px; }
+
+@media (max-width:980px) {
+  .wrapper { grid-template-columns:1fr; width:calc(100% - 28px); }
+  .center-column { order:2; margin:0 auto; }
+  .info-box { order:3; margin-top:12px; }
+  .left-column { order:1; display:flex; flex-direction:row; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .container { width:100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="inner">
+    <div class="logo">Muscle Trainer</div>
+    <nav class="nav-links">
+      <a href="home.html" target="_blank">Home</a>
+      <a href="service.html" target="_blank">Services</a>
+    </nav>
+  </div>
+</header>
+
+<div class="muscle-top">
+  <div class="inner">
+    <button data-part="chest">Chest</button>
+    <button data-part="shoulder">Shoulder</button>
+    <button data-part="abs">Abs</button>
+    <button data-part="oblique">Oblique</button>
+    <button data-part="biceps">Biceps</button>
+    <button data-part="forearm">Forearm</button>
+    <button data-part="quads">Quads</button>
+  </div>
+</div>
+
+<div class="wrapper">
+
+<div class="left-column">
+  <button class="back-btn" onclick="window.open('female back.html','_blank')">Back View</button>
+  <div class="inputs-column" style="margin-top:8px;">
+    <label>Age: <input id="age" type="number" placeholder="yrs" /></label>
+    <label>Height: <input id="height" type="number" placeholder="cm" /></label>
+    <label>Weight: <input id="weight" type="number" placeholder="kg" /></label>
+    <button id="confirmBtn">Confirm</button>
+  </div>
+</div>
+
+<div class="center-column">
+  <div class="container">
+    <img id="bodyImg" class="body-img" src="Screenshot 2025-11-03 160932.png" alt="female front">
+
+    <!-- Chest -->
+    <svg viewBox="0 0 460 920" class="muscle-svg">
+      <path id="leftChest" d="M165,180 C145,155 139,125 185,127 C245,115 231,155 225,190 C215,155 165,195 165,175 C155,165 193,190 165,170Z" />
+      <path id="rightChest" d="M302,180 C322,155 328,125 282,127 C222,115 236,155 242,190 C252,155 302,195 302,175 C312,165 274,190 302,170Z" />
+    </svg>
+
+    <!-- Shoulders -->
+    <svg viewBox="0 0 390 820" class="muscle-svg">
+      <path id="leftDeltoid" d="M100,190 C99,150 101,120 130,118 C130,142 120,170 120,166Z" />
+      <path id="rightDeltoid" d="M300,190 C320,150 299,120 270,125 C270,142 280,170 280,166Z" />
+    </svg>
+<svg viewBox="0 0 410 890" class="muscle-svg">
+  <!-- Left Abs moved 20px right -->
+  <path id="L1" class="abs-shape" 
+  d="M174,255 
+  C195,230 205,230 208,245 
+  C205,270 175,275 173,285Z" />
+  <path id="L2" class="abs-shape" 
+  d="M178,285 
+  C190,275 205,265 210,270 
+  C210,305 175,299 175,295Z" />
+  <path id="L3" class="abs-shape" 
+  d="M178,310 
+  C190,310 205,300 210,310 
+  C205,350 163,330 180,310Z" />
+<path id="R1" class="abs-shape" 
+d="M246,255 
+C225,230 215,230 212,245 
+C215,270 245,275 247,285Z" />
+
+<path id="R2" class="abs-shape" 
+d="M242,285 
+C230,275 215,265 210,270 
+C210,305 245,299 245,295Z" />
+
+<path id="R3" class="abs-shape" 
+d="M242,310 
+C230,310 215,300 210,310 
+C215,350 257,330 240,310Z" />
+
+</svg>
+    <svg viewBox="0 0 400 920" class="muscle-svg">
+      <path id="leftOblique" d="M148,264 C154,320 126,389 173,406 C179,400 174,390 169,302 C163,238 183,282 147,264 Z" />
+      <path id="rightOblique" d="M267,264 C261,320 289,389 242,406 C236,400 241,390 246,302 C252,238 232,282 268,264 Z" />
+    </svg>
+
+    <!-- Biceps -->
+    <svg viewBox="0 0 390 1300" class="muscle-svg">
+      <g transform="rotate(-30, 310, 335)translate(23,0)">
+        <path id="leftBicep" d="M320,310 C345,300 290,430 310,420 C260,340 300,320 305,280Z" />
+      </g>
+      <g transform="rotate(30, 95, 335) translate(-15,0)">
+        <path id="rightBicep" d="M70,310 C45,300 100,430 80,420 C140,340 100,320 95,280Z" />
+      </g>
+    </svg>
+
+    <!-- Forearms -->
+    <svg viewBox="0 0 390 1100" class="muscle-svg">
+      <g transform="rotate(-50, 325, 385) translate(5,0)">
+        <path id="leftForearm" d="M350,390 C340,410 310,475 280,450 C245,470 270,380 330,380Z" />
+      </g>
+      <g transform="rotate(50, 75, 367) translate(5,0)">
+        <path id="rightForearm" d="M50,390 C60,410 90,475 120,450 C155,470 130,380 70,380Z" />
+      </g>
+    </svg>
+
+    <!-- Quads -->
+    <svg viewBox="0 0 400 1100" class="muscle-svg">
+      <path id="leftQuad" d="M110,495 C65,670 110,699 170,705 C200,695 200,640 197,570 C185,555 170,520 150,510Z" />
+      <path id="rightQuad" d="M305,495 C350,670 305,699 245,705 C215,695 215,640 218,570 C230,555 245,520 265,510Z" />
+    </svg>
+
+  </div>
+</div>
+
+<div class="info-box" id="infoBox">
+  <h2>Hover a muscle</h2>
+  <p>Move your mouse over any body part to see its name and a short description.</p>
+</div>
+
+</div>
+
+<script>
+const infoBox = document.getElementById('infoBox');
+const parts = {
+  leftChest: document.getElementById('leftChest'), rightChest: document.getElementById('rightChest'),
+  leftDeltoid: document.getElementById('leftDeltoid'), rightDeltoid: document.getElementById('rightDeltoid'),
+  L1: document.getElementById('L1'), L2: document.getElementById('L2'), L3: document.getElementById('L3'),
+  R1: document.getElementById('R1'), R2: document.getElementById('R2'), R3: document.getElementById('R3'),
+  leftOblique: document.getElementById('leftOblique'), rightOblique: document.getElementById('rightOblique'),
+  leftBicep: document.getElementById('leftBicep'), rightBicep: document.getElementById('rightBicep'),
+  leftForearm: document.getElementById('leftForearm'), rightForearm: document.getElementById('rightForearm'),
+  leftQuad: document.getElementById('leftQuad'), rightQuad: document.getElementById('rightQuad'),
+};
+
+const muscleInfo = {
+  chest: { name:"Pectoralis Major", text:"Main chest muscle. Strengthens pushing power, shoulder stability, posture." },
+  shoulder: { name:"Deltoid (Front)", text:"Lifts arm forward, supports presses and shoulder stability." },
+  abs: { name:"Rectus Abdominis", text:"Core flexion, posture, intra-abdominal pressure, athletic performance." },
+  oblique: { name:"External Obliques", text:"Rotate/laterally flex torso, stabilize trunk, improve functional strength." },
+  biceps: { name:"Biceps Brachii", text:"Elbow flexion, forearm supination, pulling strength, aesthetics." },
+  forearm: { name:"Forearm Muscles", text:"Wrist/finger control, grip strength, supports almost every upper-body exercise." },
+  quads: { name:"Quadriceps", text:"Knee extension, powerful leg drive, daily function, knee stability." },
+};
+
+// Highlight groups
+const hoverPairs = {
+  leftChest:['leftChest','rightChest'],
+  rightChest:['leftChest','rightChest'],
+  leftDeltoid:['leftDeltoid','rightDeltoid'],
+  rightDeltoid:['leftDeltoid','rightDeltoid'],
+  leftOblique:['leftOblique','rightOblique'],
+  rightOblique:['leftOblique','rightOblique'],
+  leftBicep:['leftBicep','rightBicep'],
+  rightBicep:['leftBicep','rightBicep'],
+  leftForearm:['leftForearm','rightForearm'],
+  rightForearm:['leftForearm','rightForearm'],
+  leftQuad:['leftQuad','rightQuad'],
+  rightQuad:['leftQuad','rightQuad'],
+  abs:['L1','L2','L3','R1','R2','R3']
+};
+
+function clearHighlights(){
+  Object.values(parts).forEach(p=>p&&p.classList.remove('hovered'));
+  infoBox.innerHTML=`<h2>Hover a muscle</h2><p>Move your mouse over any body part to see its name and a short description.</p>`;
+}
+
+Object.keys(parts).forEach(id=>{
+  const el = parts[id];
+  el.addEventListener('mouseenter',()=>{
+    clearHighlights();
+    if(id.startsWith('L')||id.startsWith('R')){ // abs group
+      hoverPairs['abs'].forEach(p=>parts[p].classList.add('hovered'));
+      infoBox.innerHTML=`<h2>${muscleInfo.abs.name}</h2><p>${muscleInfo.abs.text}</p>`;
+    }else{
+      hoverPairs[id].forEach(p=>parts[p].classList.add('hovered'));
+      let key = id.includes('Chest')?'chest':
+                id.includes('Deltoid')?'shoulder':
+                id.includes('Oblique')?'oblique':
+                id.includes('Bicep')?'biceps':
+                id.includes('Forearm')?'forearm':
+                id.includes('Quad')?'quads':'';
+      if(muscleInfo[key]) infoBox.innerHTML=`<h2>${muscleInfo[key].name}</h2><p>${muscleInfo[key].text}</p>`;
+    }
+  });
+  el.addEventListener('mouseleave', clearHighlights);
+  el.addEventListener('click',()=>handleOpenMuscle(id));
+});
+
+document.querySelectorAll('.muscle-top button').forEach(btn=>{
+  btn.addEventListener('mouseenter',()=>{
+    clearHighlights();
+    const part = btn.dataset.part;
+    let pairIds=[];
+    if(part==='chest') pairIds=['leftChest','rightChest'];
+    if(part==='shoulder') pairIds=['leftDeltoid','rightDeltoid'];
+    if(part==='abs') pairIds=hoverPairs['abs'];
+    if(part==='oblique') pairIds=['leftOblique','rightOblique'];
+    if(part==='biceps') pairIds=['leftBicep','rightBicep'];
+    if(part==='forearm') pairIds=['leftForearm','rightForearm'];
+    if(part==='quads') pairIds=['leftQuad','rightQuad'];
+    pairIds.forEach(p=>parts[p].classList.add('hovered'));
+    if(muscleInfo[part]) infoBox.innerHTML=`<h2>${muscleInfo[part].name}</h2><p>${muscleInfo[part].text}</p>`;
+  });
+  btn.addEventListener('mouseleave',clearHighlights);
+  btn.addEventListener('click',()=>openMusclePage({
+    chest:'chest-f.html', shoulder:'shoulder-f.html', abs:'abs-f.html',
+    oblique:'oblique-f.html', biceps:'biceps-f.html', forearm:'forearm-f.html', quads:'quads-f.html'
+  }[btn.dataset.part]));
+});
+
+let userData=null;
+document.getElementById('confirmBtn').addEventListener('click',()=>{
+  const age=parseInt(document.getElementById('age').value);
+  const height=parseInt(document.getElementById('height').value);
+  const weight=parseInt(document.getElementById('weight').value);
+  if(!age||!height||!weight){alert("Please enter valid Age, Height, and Weight.");return;}
+  userData={age,height,weight};
+  alert("Data confirmed! Now click a muscle to see exercises.");
+});
+
+function getExerciseLevel(age){ if(age<=14)return{difficulty:"easy",sets:2,reps:10}; else if(age<=20)return{difficulty:"medium",sets:3,reps:12}; else return{difficulty:"hard",sets:4,reps:15}; }
+
+function openMusclePage(page){
+  if(!userData){alert("Please confirm Age, Height, Weight first!"); return;}
+  const level=getExerciseLevel(userData.age);
+  window.open(`${page}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}&age=${userData.age}&height=${userData.height}&weight=${userData.weight}`,"_blank");
+}
+
+function handleOpenMuscle(id){
+  const map = {
+    leftChest:'chest-f.html', rightChest:'chest-f.html',
+    leftDeltoid:'shoulder-f.html', rightDeltoid:'shoulder-f.html',
+    L1:'abs-f.html', L2:'abs-f.html', L3:'abs-f.html', R1:'abs-f.html', R2:'abs-f.html', R3:'abs-f.html',
+    leftOblique:'oblique-f.html', rightOblique:'oblique-f.html',
+    leftBicep:'biceps-f.html', rightBicep:'biceps-f.html',
+    leftForearm:'forearm-f.html', rightForearm:'forearm-f.html',
+    leftQuad:'quads-f.html', rightQuad:'quads-f.html',
+  };
+  if(map[id]) openMusclePage(map[id]);
+}
+
+clearHighlights();
+</script>
+
+</body>
+</html>
