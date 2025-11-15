@@ -1,256 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Back Muscles Interactive Trainer</title>
-  <style>
-    body {
-      margin: 0;
-      background: #f6f6f6;
-      font-family: "Segoe UI", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<title>Back Muscles Interactive Trainer</title>
+<style>
+  :root {
+    --bg:#0f0f0f;
+    --panel:#1a1a1a;
+    --accent:#ff4c6d;
+    --shadow:rgba(255,76,109,0.15);
+    --hover:rgba(255,76,109,0.55);
+  }
+  body {
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    background: var(--bg);
+    color: #fff;
+  }
+  header {
+    background:#121212;
+    padding:12px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px var(--shadow);
+  }
+  .logo{ font-weight:700; color:var(--accent);}
+  nav a{ color:#fff; margin-left:20px; text-decoration:none; font-weight:600;}
+  nav a:hover{ color:var(--accent); }
 
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 500px;
-      gap: 20px;
-      padding: 20px;
-    }
+  /* Body Part Buttons */
+  .muscle-nav {
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:20px auto 0 auto;
+    max-width:800px;
+    flex-wrap:wrap;
+  }
+  .muscle-nav button{
+    padding:10px 18px;
+    background:linear-gradient(145deg,#1c1c1c,#151515);
+    border:1px solid var(--accent);
+    border-radius:10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+    transition:all .3s;
+  }
+  .muscle-nav button:hover{
+    background:linear-gradient(145deg,var(--accent),#ff6b7d);
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(255,76,109,0.25);
+  }
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      aspect-ratio: 0.49;
-      user-select: none;
-    }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr 300px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    align-items: start;
+  }
 
-    .body-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      pointer-events: none;
-    }
+  .left-column {
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .left-column label {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background: rgba(255,255,255,0.05);
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:14px;
+    border:1px solid rgba(255,76,109,0.3);
+  }
+  .left-column input {
+    width:60px;
+    padding:4px 6px;
+    border:none;
+    border-bottom:2px solid var(--accent);
+    border-radius:3px;
+    background:#0f0f0f;
+    color:#fff;
+    text-align:center;
+    outline:none;
+    font-size:14px;
+  }
+  .left-column input:focus{ border-color:#ff6b7d; }
+  .confirm-btn {
+    padding:8px;
+    background:var(--accent);
+    border:none;
+    border-radius:6px;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 12px var(--shadow);
+    transition:0.2s;
+  }
+  .confirm-btn:hover{ background:#ff6b7d; }
+  .back-btn {
+    padding:10px;
+    background: linear-gradient(180deg,#ff6b6b,#ff4747);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 6px 18px var(--shadow);
+  }
+  .back-btn:hover{ transform:translateY(-2px); }
 
-    svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
+  .center-column { display:flex; justify-content:center; }
+  .container {
+    position: relative;
+    width:400px;
+  }
+  .container img.body-img { width:100%; display:block; border-radius:10px; }
 
-    svg path {
-      fill: transparent;
-      cursor: pointer;
-      transition: fill 0.25s ease, opacity 0.25s ease;
-      pointer-events: auto;
-      opacity: 0;
-    }
+  svg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none; }
+  svg path { fill:transparent; cursor:pointer; opacity:0; pointer-events:auto; transition: fill 0.22s ease, opacity 0.22s ease, stroke 0.22s ease; }
+  svg path.hovered { fill:var(--hover); opacity:1; stroke:var(--hover); stroke-width:1.8; }
 
-    svg path.hovered {
-      fill: rgba(255, 40, 0, 0.55);
-      opacity: 1;
-      stroke: rgba(255, 40, 0, 0.55);
-      stroke-width: 1.8;
-    }
+  .info-box{
+    background:linear-gradient(180deg,#0f1724,#111827);
+    color:#e6eef8;
+    border-radius:12px;
+    padding:16px;
+    box-shadow:0 10px 30px rgba(2,6,23,0.6);
+    min-height:220px;
+    font-family:"Segoe UI",sans-serif;
+  }
+  .info-box h2 { margin:0 0 8px 0; color:var(--accent); font-size:18px; }
+  .info-box p { margin:0; line-height:1.45; color:#d8e6ff; }
 
-    .info-box {
-      background: linear-gradient(180deg, #0f1724, #111827);
-      color: #e6eef8;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
-      font-family: "Segoe UI", sans-serif;
-      min-height: 220px;
-      width: 100%;
-      max-width: 400px;
-    }
+  @media(max-width:980px){
+    .wrapper{ grid-template-columns:1fr; padding:12px; }
+    .left-column{ order:1; }
+    .center-column{ order:2; margin:0 auto; }
+    .info-box{ order:3; margin-top:12px; }
+  }
 
-    .info-box h2 {
-      margin: 0 0 8px 0;
-      color: #ff7a7a;
-      font-size: 18px;
-    }
-
-    .info-box p {
-      margin: 0;
-      color: #d8e6ff;
-      line-height: 1.45;
-    }
-
-    @media (max-width: 950px) {
-      .wrapper {
-        text-align: center;
-      }
-    }
-  </style>
+  .gender-btn {
+    background: var(--accent);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight:600;
+    color:#fff;
+    text-decoration:none;
+    transition:0.3s;
+  }
+  .gender-btn:hover { background:#ff6b7d; }
+</style>
 </head>
-
 <body>
-  <div class="wrapper">
+
+<header>
+  <div class="logo">Muscle Trainer</div>
+  <nav class="nav-links">
+    <a href="female front.html" class="gender-btn" target="_blank">Change Gender</a>
+    <a href="home.html">Home</a>
+    <a href="service.html">Support</a>
+  </nav>
+</header>
+
+<!-- Muscle Buttons -->
+<div class="muscle-nav">
+  <button data-muscle="traps">Traps</button>
+  <button data-muscle="latdorsi">Lats</button>
+  <button data-muscle="lowerback">Lower Back</button>
+  <button data-muscle="hamquads">Quad</button>
+  <button data-muscle="calves">Calves</button>
+  <button data-muscle="triceps">Triceps</button>
+</div>
+
+<div class="wrapper">
+  <div class="left-column">
+    <label>Age: <input type="number" id="age" placeholder="yrs"></label>
+    <label>Height: <input type="number" id="height" placeholder="cm"></label>
+    <label>Weight: <input type="number" id="weight" placeholder="kg"></label>
+    <button class="confirm-btn" id="confirmBtn">Confirm</button>
+    <button class="back-btn" onclick="window.open('home.html','_blank')">Back</button>
+  </div>
+
+  <div class="center-column">
     <div class="container">
-      <img src="back of male.png" class="body-img" id="bodyImg">
+      <img src="https://cdn.discordapp.com/attachments/1417416769877966881/1438501778596302880/back_of_male.png?ex=691916ee&is=6917c56e&hm=33c8b24104d9b0d5150eae13b81831ba2450c3a76c574d5e0dcf44f3c37c16d9&" class="body-img">
 
-<svg viewBox="0 0 390 660">
-  <path id="leftTrap" 
-    d="M160,65 
-       C155,100 155,190 197,210 
-       C199,100 187,150 195,140 
-       C195,60 198,80 189,50Z" />
-
-   <path id="rightTrap" 
-    d="M240,65 
-       C245,100 245,190 203,210 
-       C201,100 213,150 205,140 
-       C205,60 202,80 211,50Z" />
+      <!-- SVGs -->
+      <svg viewBox="0 0 390 760">
+        <path id="leftTrap" d="M160,65 C155,100 155,190 197,210 C199,100 187,150 195,140 C195,60 198,80 189,50Z"/>
+        <path id="rightTrap" d="M240,65 C245,100 245,190 203,210 C201,100 213,150 205,140 C205,60 202,80 211,50Z"/>
+      </svg>
+      <svg viewBox="0 0 400 800">
+  <path id="leftLatDorsi" d="M120,123 C120,140 123,200 125,210 C160,290 120,290 190,230 C155,190 155,150 145,118Z" transform="translate(5,0)" />
+  <path id="rightLatDorsi" d="M270,123 C280,140 277,200 275,205 C240,290 280,290 210,230 C245,190 245,150 255,118Z" transform="translate(20,0) rotate(1 255 170)" />
 </svg>
 
+      <svg viewBox="0 0 390 840">
+        <path id="leftLowerBack" d="M183,300 C155,320 157,345 159,363 C170,375 189,385 197,405 C203,345 197,325 198,305Z" />
+        <path id="rightLowerBack" d="M217,300 C245,320 243,345 241,363 C230,375 211,385 203,405 C197,345 203,325 202,305Z" />
+      </svg>
+      <svg viewBox="0 0 400 965">
+        <path id="leftHamQuad" d="M110,520 C100,555 110,590 123,680 C110,655 190,680 168,680 C193,670 170,695 198,520 C165,555 140,520 120,520Z" />
+        <path id="rightHamQuad" d="M298,520 C308,555 298,590 285,680 C298,655 218,680 240,680 C215,670 238,695 209,520 C243,555 268,520 288,520Z" />
+      </svg>
       <svg viewBox="0 0 400 970">
         <path id="leftCalf" d="M123,700 C115,790 111,780 123,797 C195,835 172,770 169,703Z" />
         <path id="rightCalf" d="M235,705 C229,740 225,799 239,810 C315,810 283,790 285,700Z" />
       </svg>
-
       <svg viewBox="0 0 400 560">
-        <path id="leftTriceps" d="M98,90 C93,100 103,120 113,135 C138,190 133,70 108,60Z"
-          transform="rotate(30 110 95)" />
-        <path id="rightTriceps" d="M306,60 C319,100 311,110 301,130 C273,170 283,55 300,69Z"
-          transform="rotate(-30 310 95)" />
+        <path id="leftTriceps" d="M98,90 C93,100 103,120 113,135 C138,190 133,70 108,60Z" transform="rotate(30 110 95)" />
+        <path id="rightTriceps" d="M306,60 C319,100 311,110 301,130 C273,170 283,55 300,69Z" transform="rotate(-30 310 95)" />
       </svg>
-
-      <svg viewBox="0 0 400 965">
-        <path id="leftHamQuad"
-          d="M110,520 C100,555 110,590 123,680 C110,655 190,680 168,680 C193,670 170,695 198,520 C165,555 140,520 120,520Z" />
-        <path id="rightHamQuad"
-          d="M298,520 C308,555 298,590 285,680 C298,655 218,680 240,680 C215,670 238,695 209,520 C243,555 268,520 288,520Z" />
-      </svg>
-
-      <svg viewBox="0 0 400 710">
-        <path id="leftLatDorsi" d="M120,123 
-          C120,140 123,200 125,210 
-          C160,290 120,290 190,230 
-          C155,190 155,150 145,118Z" transform="translate(10,0)" />
-
-        <path id="rightLatDorsi" d="M280,123 
-          C280,140 277,200 275,205 
-          C240,290 280,290 210,230 
-          C245,190 245,150 255,118Z" />
-      </svg>
-
-      <svg viewBox="0 0 390 840">
-        <path id="leftLowerBack" 
-          d="M183,300 
-             C155,320 157,345 159,363 
-             C170,375 189,385 197,405 
-             C203,345 197,325 198,305Z" />
-
-        <path id="rightLowerBack" 
-          d="M217,300 
-             C245,320 243,345 241,363 
-             C230,375 211,385 203,405 
-             C197,345 203,325 202,305Z" />
-      </svg>
-    </div>
-
-    <div class="info-box" id="infoBox">
-      <h2>Hover the muscles</h2>
-      <p>Move your mouse over the muscles to learn about them.</p>
     </div>
   </div>
 
-  <script>
-    const ids = [
-      'leftCalf', 'rightCalf', 'leftTriceps', 'rightTriceps',
-      'leftHamQuad', 'rightHamQuad', 'leftLatDorsi', 'rightLatDorsi',
-      'leftLowerBack', 'rightLowerBack', 'leftTrap', 'rightTrap'
-    ];
+  <div class="info-box" id="infoBox">
+    <h2>Hover the muscles</h2>
+    <p>Move your mouse over the muscles to learn about them.</p>
+  </div>
+</div>
 
-    const infoBox = document.getElementById('infoBox');
-    const paths = ids.map(id => document.getElementById(id));
+<script>
+const muscleInfo = {
+  traps:{paths:["leftTrap","rightTrap"],text:"Traps — support neck/shoulder movement and stabilize scapula."},
+  latdorsi:{paths:["leftLatDorsi","rightLatDorsi"],text:"Lats — back pulling strength, posture support."},
+  lowerback:{paths:["leftLowerBack","rightLowerBack"],text:"Lower Back — spine support and stability."},
+  hamquads:{paths:["leftHamQuad","rightHamQuad"],text:"Quads & Hamstrings — leg power and stability."},
+  calves:{paths:["leftCalf","rightCalf"],text:"Calves — ankle extension and stability."},
+  triceps:{paths:["leftTriceps","rightTriceps"],text:"Triceps — arm extension, pushing strength."}
+};
 
-    function hoverTrap() {
-      highlight(['leftTrap', 'rightTrap']);
-      infoBox.innerHTML = `<h2>Trapezius</h2>
-      <p>The trapezius spans the upper and mid-back, connecting your neck, shoulders, and spine. 
-      It stabilizes the shoulder blades and supports posture, neck, and head movements.</p>`;
-    }
+// Buttons hover
+document.querySelectorAll('.muscle-nav button').forEach(btn=>{
+  const muscle=btn.dataset.muscle;
+  btn.addEventListener('mouseenter',()=>{ highlightMuscle(muscle); });
+  btn.addEventListener('mouseleave',()=>{ resetInfo(); });
+  btn.addEventListener('click',()=>{ window.open(`${muscle}.html`,'_blank'); });
+});
 
-    function hoverCalves() {
-      highlight(['leftCalf', 'rightCalf']);
-      infoBox.innerHTML = `<h2>Calves (Gastrocnemius & Soleus)</h2>
-      <p>These muscles help you stand on your toes and push off when walking or running. 
-      They play a major role in ankle movement and stability.</p>`;
-    }
+// SVG hover & click
+Object.keys(muscleInfo).forEach(muscle=>{
+  muscleInfo[muscle].paths.forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('mouseenter',()=>highlightMuscle(muscle));
+    el.addEventListener('mouseleave',()=>resetInfo());
+    el.addEventListener('click',()=>window.open(`${muscle}.html`,'_blank'));
+  });
+});
 
-    function hoverTriceps() {
-      highlight(['leftTriceps', 'rightTriceps']);
-      infoBox.innerHTML = `<h2>Triceps (Triceps Brachii)</h2>
-      <p>These muscles extend your elbows and help stabilize your arms. 
-      They are essential for pushing movements.</p>`;
-    }
+function highlightMuscle(muscle){
+  document.querySelectorAll('svg path').forEach(p=>p.classList.remove('hovered'));
+  muscleInfo[muscle].paths.forEach(id=>document.getElementById(id)?.classList.add('hovered'));
+  document.getElementById('infoBox').innerHTML=`<h2>${muscle.charAt(0).toUpperCase()+muscle.slice(1)}</h2><p>${muscleInfo[muscle].text}</p>`;
+}
 
-    function hoverHamQuad() {
-      highlight(['leftHamQuad', 'rightHamQuad']);
-      infoBox.innerHTML = `<h2>Hamstrings & Quads</h2>
-      <p>This hover covers the entire back thigh from just below the glutes down to the top of the knee. 
-      Essential for running, jumping, and leg stability.</p>`;
-    }
-
-    function hoverLatDorsi() {
-      highlight(['leftLatDorsi', 'rightLatDorsi']);
-      infoBox.innerHTML = `<h2>Latissimus Dorsi</h2>
-      <p>This hover covers the large back muscles on the sides including the lats. 
-      Important for pulling movements, posture, and back strength.</p>`;
-    }
-
-    function hoverLowerBack() {
-      highlight(['leftLowerBack', 'rightLowerBack']);
-      infoBox.innerHTML = `<h2>Lower Back (Erector Spinae)</h2>
-      <p>This region supports posture, stabilizes the spine, and aids in bending and lifting. 
-      Strengthening it helps prevent back injuries.</p>`;
-    }
-
-    function highlight(idsToAdd) {
-      paths.forEach(p => p.classList.remove('hovered'));
-      idsToAdd.forEach(id => document.getElementById(id).classList.add('hovered'));
-    }
-
-    function hoverOff() {
-      paths.forEach(p => p.classList.remove('hovered'));
-      infoBox.innerHTML = `<h2>Hover the muscles</h2>
-      <p>Move your mouse over the muscles to learn about them.</p>`;
-    }
-
-    function clickTrap() { window.open('trap.html', '_blank'); }
-    function clickCalves() { window.open('calves.html', '_blank'); }
-    function clickTriceps() { window.open('triceps.html', '_blank'); }
-    function clickHamQuad() { window.open('hamquads.html', '_blank'); }
-    function clickLatDorsi() { window.open('latdorsi.html', '_blank'); }
-    function clickLowerBack() { window.open('lowerback.html', '_blank'); }
-
-    const bind = (ids, hoverFn, clickFn) => ids.forEach(id => {
-      const el = document.getElementById(id);
-      el.addEventListener('mouseenter', hoverFn);
-      el.addEventListener('mouseleave', hoverOff);
-      el.addEventListener('click', clickFn);
-    });
-
-    bind(['leftTrap', 'rightTrap'], hoverTrap, clickTrap);
-    bind(['leftCalf', 'rightCalf'], hoverCalves, clickCalves);
-    bind(['leftTriceps', 'rightTriceps'], hoverTriceps, clickTriceps);
-    bind(['leftHamQuad', 'rightHamQuad'], hoverHamQuad, clickHamQuad);
-    bind(['leftLatDorsi', 'rightLatDorsi'], hoverLatDorsi, clickLatDorsi);
-    bind(['leftLowerBack', 'rightLowerBack'], hoverLowerBack, clickLowerBack);
-  </script>
+function resetInfo(){
+  document.querySelectorAll('svg path').forEach(p=>p.classList.remove('hovered'));
+  document.getElementById('infoBox').innerHTML=`<h2>Hover the muscles</h2><p>Move your mouse over the muscles to learn about them.</p>`;
+}
+</script>
 </body>
 </html>
