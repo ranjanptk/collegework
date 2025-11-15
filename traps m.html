@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trapezius Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+    body{
+      margin:0;
+      font-family:"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:#fff;
+      font-size:16px;
+    }
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      padding:20px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow:0 0 25px var(--shadow);
+      position:relative;
+    }
+    h1{
+      color:var(--accent);
+      text-align:center;
+      margin-bottom:20px;
+      text-shadow:0 0 6px var(--glow);
+      font-size:26px;
+    }
+    .exercise-row{
+      display:flex;
+      gap:20px;
+      margin-bottom:30px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .exercise-text{
+      flex:1;
+      min-width:250px;
+    }
+    .exercise-text h2{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .exercise-text p{
+      margin:0 0 10px 0;
+      font-size:16px;
+      color:#ddd;
+      line-height:1.5;
+    }
+    .exercise-img{
+      flex:1;
+      min-width:250px;
+      text-align:center;
+    }
+    .exercise-img img{
+      width:100%;
+      max-height:300px;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .back-btn{
+      display:inline-block;
+      position:absolute;
+      top:20px;
+      left:20px;
+      padding:10px 14px;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:10px;
+      box-shadow:0 6px 20px var(--glow);
+      transition:transform .2s, box-shadow .2s;
+      z-index:10;
+    }
+    .back-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 28px var(--glow);
+    }
+    .user-info{
+      margin:0 0 20px 0;
+      background:rgba(255,60,60,0.05);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      font-size:16px;
+      color:#fff;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .user-info strong{
+      color:var(--accent);
+    }
+    @media (max-width:700px){
+      .exercise-row{
+        flex-direction:column;
+      }
+      .exercise-img{
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-btn" href="male front.html">← Back to Body</a>
+    <div class="user-info" id="user-info">
+      Loading your data...
+    </div>
+
+    <h1>Trapezius Exercises</h1>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Barbell Shrugs</h2>
+        <p id="exercise1">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold a barbell in front of thighs, shrug shoulders straight up, pause, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds upper traps, improves posture and neck support, enhances overall shoulder aesthetics.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="barbell-shrug.gif" alt="Barbell Shrugs">
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Dumbbell Shrugs</h2>
+        <p id="exercise2">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold dumbbells at your sides, shrug shoulders upward, hold, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Isolates traps, increases shoulder width, and balances symmetry with other upper body muscles.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="dumbbell-shrug.gif" alt="Dumbbell Shrugs">
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Face Pulls (Cable)</h2>
+        <p id="exercise3">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Attach rope to cable at face level, pull towards face while flaring elbows, then slowly release.</p>
+        <p><strong>Benefits:</strong> Strengthens rear delts and traps, improves posture and shoulder stability.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="face-pull-cable.gif" alt="Face Pulls">
+      </div>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Upright Rows (Barbell or Dumbbell)</h2>
+        <p id="exercise4">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold barbell/dumbbells in front, lift straight up to collarbone while keeping elbows high, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds traps and medial delts, improves shoulder definition and strength.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="up-rows.gif" alt="Upright Rows">
+      </div>
+    </div>
+
+<!-- Exercise 5: Barbell Behind-the-Back Shrugs -->
+<div class="exercise-row">
+  <div class="exercise-text">
+    <h2>Barbell Behind-the-Back Shrugs</h2>
+    <p id="exercise5">Loading recommended sets/reps...</p>
+    <p><strong>How to do it:</strong> Hold a barbell behind your hips with an overhand grip. Keep your arms straight and shrug your shoulders straight up toward your ears. Hold briefly at the top, then slowly lower the barbell back down.</p>
+    <p><strong>Benefits:</strong> Emphasizes middle and upper traps, improves shoulder stability and posture, and provides a different stimulus than front shrugs.</p>
+  </div>
+  <div class="exercise-img">
+    <img src="behind-the-back-shrugs.gif" alt="Barbell Behind-the-Back Shrugs">
+  </div>
+</div>
+
+
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get('difficulty') || 'medium';
+  const sets = params.get('sets') || '3';
+  const reps = params.get('reps') || '12';
+  const height = params.get('height') || 'N/A';
+  const weight = params.get('weight') || 'N/A';
+  const age = params.get('age') || 'N/A';
+
+  const userInfo = document.getElementById('user-info');
+  userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
+
+  const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
+  exercises.forEach((id) => {
+    const p = document.getElementById(id);
+    p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
+  });
+</script>
+</body>
+</html>
