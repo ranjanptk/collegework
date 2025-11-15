@@ -339,46 +339,83 @@
     </div>
   </div>
 
-  <script>
-    const muscleInfo = {
-      traps: { paths: ["leftTrap", "rightTrap"], text: "Traps — The trapezius muscles are located across the upper back and neck, helping lift and rotate the shoulders. They play a key role in stabilizing the scapula during arm movements. Strong traps improve posture and reduce the risk of neck and shoulder injuries." },
-      latdorsi: { paths: ["leftLatDorsi", "rightLatDorsi"], text: "Lats — The latissimus dorsi muscles span the middle and lower back, pulling the arms down and back. They are crucial for exercises like pull-ups, rows, and swimming strokes. Well-developed lats enhance back width and upper body strength." },
-      lowerback: { paths: ["leftLowerBack", "rightLowerBack"], text: "Lower Back — The lower back muscles support the spine and help maintain upright posture. They provide stability during lifting and twisting movements. Strengthening these muscles reduces the risk of back pain and injuries." },
-      hamquads: { paths: ["leftHamQuad", "rightHamQuad"], text: "Quads & Hamstrings — The quadriceps are the large muscles on the front of the thigh responsible for extending the knee. They are heavily involved in walking, running, squatting, and jumping. Strong quads improve athletic performance and knee joint stability." },
-      calves: { paths: ["leftCalf", "rightCalf"], text: "Calves — The calf muscles, including the gastrocnemius and soleus, lift the heel and stabilize the ankle. They are essential for walking, running, and jumping movements. Well-developed calves enhance lower leg strength, balance, and endurance." },
-      triceps: { paths: ["leftTriceps", "rightTriceps"], text: "Triceps — The triceps are the muscles at the back of the upper arm that extend the elbow. They play a major role in pushing movements like push-ups, presses, and dips. Strong triceps improve arm definition, upper body strength, and overall functional power." }
-    };
+<script>
+  const infoBox = document.getElementById('infoBox');
 
-    // Buttons hover
-    document.querySelectorAll('.muscle-nav button').forEach(btn => {
-      const muscle = btn.dataset.muscle;
-      btn.addEventListener('mouseenter', () => { highlightMuscle(muscle); });
-      btn.addEventListener('mouseleave', () => { resetInfo(); });
-      btn.addEventListener('click', () => { window.open(`${muscle}-m.html`, '_blank'); });
+  // Muscle data
+  const muscleInfo = {
+    traps: { paths: ["leftTrap", "rightTrap"], text: "Traps — The trapezius muscles are located across the upper back and neck, helping lift and rotate the shoulders. They play a key role in stabilizing the scapula during arm movements. Strong traps improve posture and reduce the risk of neck and shoulder injuries." },
+    latdorsi: { paths: ["leftLatDorsi", "rightLatDorsi"], text: "Lats — The latissimus dorsi muscles span the middle and lower back, pulling the arms down and back. They are crucial for exercises like pull-ups, rows, and swimming strokes. Well-developed lats enhance back width and upper body strength." },
+    lowerback: { paths: ["leftLowerBack", "rightLowerBack"], text: "Lower Back — The lower back muscles support the spine and help maintain upright posture. They provide stability during lifting and twisting movements. Strengthening these muscles reduces the risk of back pain and injuries." },
+    hamquads: { paths: ["leftHamQuad", "rightHamQuad"], text: "Quads & Hamstrings — The quadriceps are the large muscles on the front of the thigh responsible for extending the knee. They are heavily involved in walking, running, squatting, and jumping. Strong quads improve athletic performance and knee joint stability." },
+    calves: { paths: ["leftCalf", "rightCalf"], text: "Calves — The calf muscles, including the gastrocnemius and soleus, lift the heel and stabilize the ankle. They are essential for walking, running, and jumping movements. Well-developed calves enhance lower leg strength, balance, and endurance." },
+    triceps: { paths: ["leftTriceps", "rightTriceps"], text: "Triceps — The triceps are the muscles at the back of the upper arm that extend the elbow. They play a major role in pushing movements like push-ups, presses, and dips. Strong triceps improve arm definition, upper body strength, and overall functional power." }
+  };
+
+  // Hover & click functions
+  function highlightMuscle(muscle) {
+    document.querySelectorAll('svg path').forEach(p => p.classList.remove('hovered'));
+    muscleInfo[muscle].paths.forEach(id => document.getElementById(id)?.classList.add('hovered'));
+    infoBox.innerHTML = `<h2>${muscle.charAt(0).toUpperCase() + muscle.slice(1)}</h2><p>${muscleInfo[muscle].text}</p>`;
+  }
+
+  function resetInfo() {
+    document.querySelectorAll('svg path').forEach(p => p.classList.remove('hovered'));
+    infoBox.innerHTML = `<h2>Hover the muscles</h2><p>Move your mouse over the muscles to learn about them.</p>`;
+  }
+
+  // Attach hover and click to muscle buttons
+  document.querySelectorAll('.muscle-nav button').forEach(btn => {
+    const muscle = btn.dataset.muscle;
+    btn.addEventListener('mouseenter', () => highlightMuscle(muscle));
+    btn.addEventListener('mouseleave', resetInfo);
+    btn.addEventListener('click', () => openMusclePage(`${muscle}-m.html`));
+  });
+
+  // Attach hover and click to SVG paths
+  Object.keys(muscleInfo).forEach(muscle => {
+    muscleInfo[muscle].paths.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('mouseenter', () => highlightMuscle(muscle));
+      el.addEventListener('mouseleave', resetInfo);
+      el.addEventListener('click', () => openMusclePage(`${muscle}-m.html`));
     });
+  });
 
-    // SVG hover & click
-    Object.keys(muscleInfo).forEach(muscle => {
-      muscleInfo[muscle].paths.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.addEventListener('mouseenter', () => highlightMuscle(muscle));
-        el.addEventListener('mouseleave', () => resetInfo());
-        el.addEventListener('click', () => window.open(`${muscle}-m.html`, '_blank'));
-      });
-    });
-
-    function highlightMuscle(muscle) {
-      document.querySelectorAll('svg path').forEach(p => p.classList.remove('hovered'));
-      muscleInfo[muscle].paths.forEach(id => document.getElementById(id)?.classList.add('hovered'));
-      document.getElementById('infoBox').innerHTML = `<h2>${muscle.charAt(0).toUpperCase() + muscle.slice(1)}</h2><p>${muscleInfo[muscle].text}</p>`;
+  // User data
+  let userData = null;
+  document.getElementById('confirmBtn').addEventListener('click', () => {
+    const age = parseInt(document.getElementById('age').value);
+    const height = parseInt(document.getElementById('height').value);
+    const weight = parseInt(document.getElementById('weight').value);
+    if (!age || !height || !weight) {
+      alert("Please enter valid Age, Height, and Weight.");
+      return;
     }
+    userData = { age, height, weight };
+    alert("Data confirmed! Now click a muscle to see exercises.");
+  });
 
-    function resetInfo() {
-      document.querySelectorAll('svg path').forEach(p => p.classList.remove('hovered'));
-      document.getElementById('infoBox').innerHTML = `<h2>Hover the muscles</h2><p>Move your mouse over the muscles to learn about them.</p>`;
+  // Determine exercise level based on age
+  function getExerciseLevel(age) {
+    if (age <= 14) return { difficulty: "easy", sets: 2, reps: 10 };
+    else if (age <= 20) return { difficulty: "medium", sets: 3, reps: 12 };
+    else return { difficulty: "hard", sets: 4, reps: 15 };
+  }
+
+  // Open muscle page only after confirmation
+  function openMusclePage(page) {
+    if (!userData) {
+      alert("Please confirm Age, Height, and Weight first!");
+      return;
     }
-  </script>
+    const level = getExerciseLevel(userData.age);
+    const url = `${page}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}&age=${userData.age}&height=${userData.height}&weight=${userData.weight}`;
+    window.open(url, "_self"); // opens in same tab so data resets on back
+  }
+</script>
+
 </body>
 
 </html>
