@@ -306,10 +306,6 @@
   <header class="navbar">
     <div class="inner">
       <div class="logo">Muscle Trainer</div>
- <nav class="nav-links">
-  <a href="home.html" target="_blank">Home</a>
-  <a href="services.html" target="_blank">Services</a>
-</nav>
      <nav class="nav-links">
         <a href="home.html">Home</a>
         <a href="service.html">Support</a>
@@ -528,11 +524,10 @@ function hoverLowerBack() {
     [leftHamQuad, rightHamQuad].forEach(el => el.onclick = () => openMusclePage('hamquads f.html'));
     [leftLat, rightLat].forEach(el => el.onclick = () => openMusclePage('lats f.html'));
     [leftLowerBack, rightLowerBack].forEach(el => el.onclick = () => openMusclePage('lowerback f.html'));
-    document.querySelectorAll('.muscle-top button').forEach(btn => { btn.addEventListener('click', () => { openMusclePage(btn.dataset.part + " f.html"); }); });
+    document.querySelectorAll('.muscle-top button').forEach(btn => { btn.addEventListener('click',
+     () => { openMusclePage(btn.dataset.part + " f.html"); }); });
   </script>
 
 </body>
 
-
 </html>
-
