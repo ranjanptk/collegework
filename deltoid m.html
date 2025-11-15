@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deltoid Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --accent:#ff3b3b;
+      --shadow:rgba(255,60,60,0.14);
+      --glow:rgba(255,60,60,0.25);
+    }
+    body{
+      margin:0;
+      font-family:"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:#fff;
+      font-size:16px;
+    }
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      padding:20px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow:0 0 25px var(--shadow);
+      position:relative;
+    }
+    h1{
+      color:var(--accent);
+      text-align:center;
+      margin-bottom:20px;
+      text-shadow:0 0 6px var(--glow);
+      font-size:26px;
+    }
+    .exercise-row{
+      display:flex;
+      gap:20px;
+      margin-bottom:30px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .exercise-text{
+      flex:1;
+      min-width:250px;
+    }
+    .exercise-text h2{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .exercise-text p{
+      margin:0 0 10px 0;
+      font-size:16px;
+      color:#ddd;
+      line-height:1.5;
+    }
+    .exercise-img{
+      flex:1;
+      min-width:250px;
+      text-align:center;
+    }
+    .exercise-img img{
+      width:100%;
+      max-height:300px;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .back-btn{
+      display:inline-block;
+      position:absolute;
+      top:20px;
+      left:20px;
+      padding:10px 14px;
+      background:linear-gradient(145deg,var(--accent),#ff1f1f);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:10px;
+      box-shadow:0 6px 20px var(--glow);
+      transition:transform .2s, box-shadow .2s;
+      z-index:10;
+    }
+    .back-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 28px var(--glow);
+    }
+    .user-info{
+      margin:0 0 20px 0;
+      background:rgba(255,60,60,0.05);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      font-size:16px;
+      color:#fff;
+      box-shadow:0 0 15px var(--shadow);
+    }
+    .user-info strong{
+      color:var(--accent);
+    }
+    @media (max-width:700px){
+      .exercise-row{
+        flex-direction:column;
+      }
+      .exercise-img{
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-btn" href="male front.html">← Back to Body</a>
+    <div class="user-info" id="user-info">
+      Loading your data...
+    </div>
+
+    <h1>Deltoid Exercises</h1>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Overhead Press (Barbell)</h2>
+        <p id="exercise1">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Stand with feet shoulder-width, hold barbell at shoulder height, press overhead until arms are fully extended, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds overall shoulder strength, targets anterior and medial delts, improves upper body power.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="overhead-press.gif" alt="Overhead Press">
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Dumbbell Lateral Raises</h2>
+        <p id="exercise2">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Stand holding dumbbells at your sides, lift arms out to shoulder height, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Isolates medial delts, improves shoulder width and definition.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="lateral-raise.gif" alt="Dumbbell Lateral Raises">
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Front Raises (Plate)</h2>
+        <p id="exercise3">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold plate in front of thighs, lift them straight in front to shoulder height, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Targets anterior delts, improves shoulder strength and posture.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="front-raise.gif" alt="Front Raises">
+      </div>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Rear Delt Fly (Dumbbells)</h2>
+        <p id="exercise4">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Bend forward at the hips holding dumbbells, lift arms out to sides, squeeze shoulder blades, then lower slowly.</p>
+        <p><strong>Benefits:</strong> Strengthens posterior delts, improves posture, balances shoulder development.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="rear-delt-fly.gif" alt="Rear Delt Fly">
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Arnold Press</h2>
+        <p id="exercise5">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Hold dumbbells at shoulder height, palms facing body, rotate wrists while pressing overhead, then lower and rotate back.</p>
+        <p><strong>Benefits:</strong> Targets all three heads of delts, improves mobility and shoulder aesthetics.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="arnold-press.gif" alt="Arnold Press">
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get('difficulty') || 'medium';
+  const sets = params.get('sets') || '3';
+  const reps = params.get('reps') || '12';
+  const height = params.get('height') || 'N/A';
+  const weight = params.get('weight') || 'N/A';
+  const age = params.get('age') || 'N/A';
+
+  const userInfo = document.getElementById('user-info');
+  userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
+
+  const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
+  exercises.forEach((id) => {
+    const p = document.getElementById(id);
+    p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
+  });
+</script>
+</body>
+</html>
