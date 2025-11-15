@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chest Exercises</title>
+  <title>Female Chest Exercises</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root{
@@ -61,16 +61,13 @@
       flex:1;
       min-width:250px;
       text-align:center;
-      padding:10px;
-      border:2px dashed var(--accent);
-      border-radius:10px;
-      opacity:0.6;
     }
-    .exercise-img span{
-      display:block;
-      margin-top:10px;
-      font-size:14px;
-      color:#aaa;
+    .exercise-img img{
+      width:100%;
+      max-height:300px;
+      object-fit:contain;
+      border-radius:10px;
+      box-shadow:0 0 15px var(--shadow);
     }
     .back-btn{
       display:inline-block;
@@ -109,31 +106,30 @@
         flex-direction:column;
       }
       .exercise-img{
-        order:-1;
+        order: -1;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <a class="back-btn" href="female back.html">← Back to Body</a>
-
+    <a class="back-btn" href="female front.html">← Back to Body</a>
     <div class="user-info" id="user-info">
       Loading your data...
     </div>
 
-    <h1>Chest Exercises</h1>
+    <h1>Female Chest Exercises</h1>
 
     <!-- Exercise 1 -->
     <div class="exercise-row">
       <div class="exercise-text">
-        <h2>Push-Ups</h2>
+        <h2>Push-Ups (Knee/Standard)</h2>
         <p id="exercise1">Loading recommended sets/reps...</p>
-        <p><strong>How to do it:</strong> Keep hands shoulder-width, lower your chest to the ground, then push back up while squeezing your chest.</p>
-        <p><strong>Benefits:</strong> Works the entire chest, shoulders, and triceps. Great for strength and endurance.</p>
+        <p><strong>How to do it:</strong> Hands shoulder-width, lower chest to ground, push back up, modify with knees if needed.</p>
+        <p><strong>Benefits:</strong> Strengthens chest, shoulders, and triceps, improves upper body endurance.</p>
       </div>
       <div class="exercise-img">
-        <span>GIF placeholder — insert push-up GIF here</span>
+        <img src="push-upf.gif" alt="Push-Up GIF">
       </div>
     </div>
 
@@ -142,37 +138,49 @@
       <div class="exercise-text">
         <h2>Dumbbell Chest Press</h2>
         <p id="exercise2">Loading recommended sets/reps...</p>
-        <p><strong>How to do it:</strong> Lie flat, press dumbbells upward while squeezing chest muscles, then lower slowly.</p>
-        <p><strong>Benefits:</strong> Builds mid and lower chest, increases overall chest strength.</p>
+        <p><strong>How to do it:</strong> Lie flat, press dumbbells upward, squeeze chest muscles, lower slowly.</p>
+        <p><strong>Benefits:</strong> Builds chest strength, targets mid and lower chest, improves shape.</p>
       </div>
       <div class="exercise-img">
-        <span>GIF placeholder — insert dumbbell chest press GIF here</span>
+        <img src="dumbbell-chest-press.gif" alt="Dumbbell Chest Press GIF">
       </div>
     </div>
 
-    <!-- Exercise 3 -->
-    <div class="exercise-row">
+      <div class="exercise-row">
       <div class="exercise-text">
-        <h2>Dumbbell Fly</h2>
+        <h2>Chest Dip (Machine)</h2>
         <p id="exercise3">Loading recommended sets/reps...</p>
-        <p><strong>How to do it:</strong> Open arms wide and bring them together in a hugging motion, feeling the chest stretch and contract.</p>
-        <p><strong>Benefits:</strong> Targets outer and inner chest, increases chest width and definition.</p>
+        <p><strong>How to do it:</strong> Sit in chest dip machine, grip handles, push down until elbows bend to 90°, then return slowly.</p>
+        <p><strong>Benefits:</strong> Targets lower chest, triceps, and shoulders, improves muscle definition safely.</p>
       </div>
       <div class="exercise-img">
-        <span>GIF placeholder — insert dumbbell fly GIF here</span>
+        <img src="chest-dip.gif" alt="Chest Dip Machine GIF">
       </div>
     </div>
 
     <!-- Exercise 4 -->
     <div class="exercise-row">
       <div class="exercise-text">
-        <h2>Incline Push-Ups</h2>
+        <h2>Decline Push-Ups</h2>
         <p id="exercise4">Loading recommended sets/reps...</p>
-        <p><strong>How to do it:</strong> Place hands on a raised platform and perform a push-up, emphasizing the upper chest.</p>
-        <p><strong>Benefits:</strong> Strengthens upper chest and improves aesthetics.</p>
+        <p><strong>How to do it:</strong> Legs on elevated surface, perform push-ups, emphasize upper chest.</p>
+        <p><strong>Benefits:</strong> Strengthens upper chest, improves posture, tones upper body.</p>
       </div>
       <div class="exercise-img">
-        <span>GIF placeholder — insert incline push-up GIF here</span>
+        <img src="decline-pushup.gif" alt="Incline Push-Up GIF">
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-row">
+      <div class="exercise-text">
+        <h2>Chest Press Machine</h2>
+        <p id="exercise5">Loading recommended sets/reps...</p>
+        <p><strong>How to do it:</strong> Sit on machine, grip handles, push forward, then return slowly.</p>
+        <p><strong>Benefits:</strong> Targets chest muscles safely, good for beginners and toning.</p>
+      </div>
+      <div class="exercise-img">
+        <img src="chest-press-machine.gif" alt="Chest Press Machine GIF">
       </div>
     </div>
 
@@ -190,7 +198,7 @@
   const userInfo = document.getElementById('user-info');
   userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
 
-  const exercises = ["exercise1","exercise2","exercise3","exercise4"];
+  const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
   exercises.forEach((id) => {
     const p = document.getElementById(id);
     p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
