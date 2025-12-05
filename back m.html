@@ -208,6 +208,21 @@
       line-height: 1.45;
       color: #d8e6ff;
     }
+    .exp-btn {
+  margin:8px;
+  padding:10px 18px;
+  background:#2a2a2a;
+  border:1px solid var(--accent);
+  border-radius:8px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+.exp-btn:hover {
+  background:var(--accent);
+}
+
 
     @media(max-width:980px) {
       .wrapper {
@@ -256,6 +271,24 @@
     </nav>
   </header>
 
+  <!-- Experience Selection Box -->
+<div id="experienceBox" style="
+  display:none;
+  width:300px;
+  margin:20px auto;
+  padding:20px;
+  background:#1a1a1a;
+  border:1px solid var(--accent);
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 6px 20px var(--shadow);
+">
+  <h3 style="color:#ff4c6d;">Select Your Experience Level</h3>
+  <button class="exp-btn" data-exp="beginner">Beginner</button>
+  <button class="exp-btn" data-exp="intermediate">Intermediate</button>
+  <button class="exp-btn" data-exp="pro">Pro</button>
+</div>
+
   <!-- Muscle Buttons -->
   <div class="muscle-nav">
     <button data-muscle="traps">Traps</button>
@@ -272,13 +305,13 @@
       <label>Height: <input type="number" id="height" placeholder="cm"></label>
       <label>Weight: <input type="number" id="weight" placeholder="kg"></label>
       <button class="confirm-btn" id="confirmBtn">Confirm</button>
-      <button class="back-btn" onclick="window.open('male front.html','_blank')">Front View</button>
+      <button class="back-btn" onclick="window.open('home.html','_blank')">Back</button>
     </div>
 
     <div class="center-column">
       <div class="container">
         <img
-          src="https://cdn.discordapp.com/attachments/1417416769877966881/1438501778596302880/back_of_male.png?ex=691916ee&is=6917c56e&hm=33c8b24104d9b0d5150eae13b81831ba2450c3a76c574d5e0dcf44f3c37c16d9&"
+          src="back of male.png"
           class="body-img">
 
         <!-- SVGs -->
@@ -389,13 +422,26 @@
     const age = parseInt(document.getElementById('age').value);
     const height = parseInt(document.getElementById('height').value);
     const weight = parseInt(document.getElementById('weight').value);
-    if (!age || !height || !weight) {
-      alert("Please enter valid Age, Height, and Weight.");
-      return;
-    }
-    userData = { age, height, weight };
-    alert("Data confirmed! Now click a muscle to see exercises.");
+ if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
+
+userData = { age, height, weight };
+
+document.getElementById('experienceBox').style.display = "block";
+
   });
+  // Experience selection buttons
+document.querySelectorAll(".exp-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const exp = btn.dataset.exp;
+    userData.experience = exp;
+
+    alert("Experience level selected: " + exp);
+
+    // Hide experienceBox after selection
+    document.getElementById('experienceBox').style.display = "none";
+  });
+});
+
 
   // Determine exercise level based on age
   function getExerciseLevel(age) {
@@ -405,18 +451,28 @@
   }
 
   // Open muscle page only after confirmation
-  function openMusclePage(page) {
-    if (!userData) {
-      alert("Please confirm Age, Height, and Weight first!");
-      return;
-    }
-    const level = getExerciseLevel(userData.age);
-    const url = `${page}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}&age=${userData.age}&height=${userData.height}&weight=${userData.weight}`;
-    window.open(url, "_self"); // opens in same tab so data resets on back
+function openMusclePage(muscle){
+  if(!userData){ 
+    alert("Please confirm Age, Height, Weight first!"); 
+    return; 
   }
+  if(!userData.experience){
+    alert("Please select your experience level!");
+    return;
+  }
+
+  const level = getExerciseLevel(userData.age);
+
+  window.open(
+    `${muscle} m.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
+    `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
+    `&experience=${userData.experience}`,
+    "_blank"
+  );
+}
+
 </script>
 
 </body>
 
 </html>
-
