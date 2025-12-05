@@ -68,6 +68,21 @@ html, body { height:100%; margin:0; background:var(--bg); color:#fff; font-famil
 .gender-btn:hover {
   background:#ff6b7d;
 }
+.exp-btn {
+  margin:8px;
+  padding:10px 18px;
+  background:#2a2a2a;
+  border:1px solid var(--accent);
+  border-radius:8px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+.exp-btn:hover {
+  background:var(--accent);
+}
+
 
 </style>
 </head>
@@ -83,6 +98,24 @@ html, body { height:100%; margin:0; background:var(--bg); color:#fff; font-famil
     </nav>
   </div>
 </header>
+<!-- Experience Selection Box -->
+<div id="experienceBox" style="
+  display:none;
+  width:300px;
+  margin:20px auto;
+  padding:20px;
+  background:#1a1a1a;
+  border:1px solid var(--accent);
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 6px 20px var(--shadow);
+">
+  <h3 style="color:#ff4c6d;">Select Your Experience Level</h3>
+  <button class="exp-btn" data-exp="beginner">Beginner</button>
+  <button class="exp-btn" data-exp="intermediate">Intermediate</button>
+  <button class="exp-btn" data-exp="pro">Pro</button>
+</div>
+
 
 <div class="muscle-top">
   <div class="inner">
@@ -288,18 +321,49 @@ document.getElementById('confirmBtn').addEventListener('click',()=>{
   const age=parseInt(document.getElementById('age').value);
   const height=parseInt(document.getElementById('height').value);
   const weight=parseInt(document.getElementById('weight').value);
-  if(!age||!height||!weight){alert("Please enter valid Age, Height, and Weight.");return;}
-  userData={age,height,weight};
-  alert("Data confirmed! Now click a muscle to see exercises.");
+if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
+
+userData = { age, height, weight };
+
+// Show experience selection box
+document.getElementById('experienceBox').style.display = "block";
+
+});
+// Experience selection buttons
+document.querySelectorAll(".exp-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const exp = btn.dataset.exp;
+    userData.experience = exp;
+
+    alert("Experience level selected: " + exp);
+
+    // Hide experienceBox after selection
+    document.getElementById('experienceBox').style.display = "none";
+  });
 });
 
-function getExerciseLevel(age){ if(age<=14)return{difficulty:"easy",sets:2,reps:10}; else if(age<=20)return{difficulty:"medium",sets:3,reps:12}; else return{difficulty:"hard",sets:4,reps:15}; }
 
-function openMusclePage(page){
-  if(!userData){alert("Please confirm Age, Height, Weight first!"); return;}
-  const level=getExerciseLevel(userData.age);
-  window.open(`${page}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}&age=${userData.age}&height=${userData.height}&weight=${userData.weight}`,"_blank");
+function getExerciseLevel(age){ if(age<=14)return{difficulty:"easy",sets:2,reps:10}; else if(age<=20)return{difficulty:"medium",sets:3,reps:12}; else return{difficulty:"hard",sets:4,reps:15}; }
+function openMusclePage(muscle){
+  if(!userData){ 
+    alert("Please confirm Age, Height, Weight first!"); 
+    return; 
+  }
+  if(!userData.experience){
+    alert("Please select your experience level!");
+    return;
+  }
+
+  const level = getExerciseLevel(userData.age);
+
+  window.open(
+    `${muscle} m.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
+    `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
+    `&experience=${userData.experience}`,
+    "_blank"
+  );
 }
+
 
 function handleOpenMuscle(id){
   const map = {
@@ -319,4 +383,3 @@ clearHighlights();
 
 </body>
 </html>
-
