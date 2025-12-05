@@ -109,11 +109,31 @@
         order: -1;
       }
     }
+    .experience-info{
+  margin:15px 0;
+  background:rgba(255,60,60,0.1);
+  padding:15px;
+  border-radius:10px;
+  margin-top: 50px;
+  text-align:center;
+  font-size:16px;
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 0 15px var(--shadow);
+}
+.experience-info strong{
+  color:var(--accent);
+}
+
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back-btn" href="male front.html">← Back to Body</a>
+    <div class="experience-info" id="experience-info">
+  Loading experience level...
+</div>
+
     <div class="user-info" id="user-info">
       Loading your data...
     </div>
@@ -196,15 +216,36 @@
   const height = params.get('height') || 'N/A';
   const weight = params.get('weight') || 'N/A';
   const age = params.get('age') || 'N/A';
+  const experience = params.get('experience') || 'beginner';
 
+  // Show user info
   const userInfo = document.getElementById('user-info');
   userInfo.innerHTML = `Your height is <strong>${height} cm</strong>, your weight is <strong>${weight} kg</strong>, and your age is <strong>${age}</strong>.`;
 
+  // Show experience message
+  const expBox = document.getElementById("experience-info");
+
+  let expMessage = "";
+
+  if(experience === "beginner"){
+    expMessage = "You are a <strong>Beginner</strong>. Your exercises are adjusted to be easier and safe as you build your strength.";
+  }
+  else if(experience === "intermediate"){
+    expMessage = "You are at an <strong>Intermediate</strong> level. Your workout includes balanced intensity for steady progress.";
+  }
+  else if(experience === "pro"){
+    expMessage = "You are a <strong>Pro</strong>. Your sets and reps are optimized for high-intensity strength training.";
+  }
+
+  expBox.innerHTML = expMessage;
+
+  // Show exercise recommendations
   const exercises = ["exercise1","exercise2","exercise3","exercise4","exercise5"];
   exercises.forEach((id) => {
     const p = document.getElementById(id);
     p.innerHTML = `Recommended: <strong>${sets} sets x ${reps} reps</strong> (${difficulty} level)`;
   });
 </script>
+
 </body>
 </html>
