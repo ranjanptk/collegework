@@ -312,6 +312,7 @@
 .exp-btn:hover {
   background:var(--accent);
 }
+
   </style>
 </head>
 
@@ -326,7 +327,8 @@
       </nav>
     </div>
   </header>
-  <div id="experienceBox" style="
+<!-- Experience Selection Box -->
+<div id="experienceBox" style="
   display:none;
   width:300px;
   margin:20px auto;
@@ -532,11 +534,16 @@ function hoverLowerBack() {
       const age = parseInt(document.getElementById('age').value);
       const height = parseInt(document.getElementById('height').value);
       const weight = parseInt(document.getElementById('weight').value);
-      if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
-userData={age,height,weight};
-alert("Data confirmed! Now click a muscle to see exercises.");
+if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
+
+userData = { age, height, weight };
+
+// Show experience selection box
+document.getElementById('experienceBox').style.display = "block";
+
     });
-    document.querySelectorAll(".exp-btn").forEach(btn => {
+    // Experience selection buttons
+document.querySelectorAll(".exp-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const exp = btn.dataset.exp;
     userData.experience = exp;
@@ -548,12 +555,13 @@ alert("Data confirmed! Now click a muscle to see exercises.");
   });
 });
 
+
     function getExerciseLevel(age) {
       if (age <= 14) return { difficulty: "easy", sets: 2, reps: 10 };
       else if (age <= 20) return { difficulty: "medium", sets: 3, reps: 12 };
       else return { difficulty: "hard", sets: 4, reps: 15 };
     }
-   function openMusclePage(muscle){
+  function openMusclePage(muscle){
   if(!userData){ 
     alert("Please confirm Age, Height, Weight first!"); 
     return; 
@@ -572,6 +580,7 @@ alert("Data confirmed! Now click a muscle to see exercises.");
     "_blank"
   );
 }
+
 
     [leftTrap, rightTrap].forEach(el => el.onclick = () => openMusclePage('trap f.html'));
     [leftTriceps, rightTriceps].forEach(el => el.onclick = () => openMusclePage('triceps f.html'));
