@@ -109,12 +109,28 @@
         order:-1;
       }
     }
+    .experience-info{
+  margin:15px 0;
+  background:rgba(255,60,60,0.1);
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  font-size:16px;
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 0 15px var(--shadow);
+}
+.experience-info strong{
+  color:var(--accent);
+}
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back-btn" href="female back.html">← Back to Body</a>
-
+<div class="experience-info" id="experience-info">
+  Loading experience level...
+</div>
     <div class="user-info" id="user-info">
       Loading your data...
     </div>
@@ -187,7 +203,6 @@
     </div>
 
   </div>
-
 
 <script>
   const params = new URLSearchParams(window.location.search);
