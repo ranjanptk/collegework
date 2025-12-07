@@ -1,0 +1,114 @@
+<?php
+$selectedPlan = isset($_GET['plan']) ? $_GET['plan'] : "Not Selected";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerFit Gym Registration</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  body { background-image:url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba'); background-size:cover; background-position:center; background-attachment:fixed; color:white; }
+  
+  .overlay { background: rgba(0,0,0,0.7); width:100%; min-height:100vh; padding:50px 20px; display:flex; justify-content:center; align-items:center; }
+  
+  .registration-form { background:#1a1a1a; padding:40px; border-radius:16px; width:100%; max-width:500px; box-shadow:0 0 20px rgba(255,59,59,0.5); }
+  .registration-form h2 { text-align:center; margin-bottom:30px; color:#ff3b3b; }
+  .registration-form label { display:block; margin-bottom:8px; margin-top:15px; font-weight:bold; }
+  .registration-form input, .registration-form select { width:100%; padding:10px; border-radius:8px; border:none; font-size:16px; }
+
+  .upload-box {
+    width:100%;
+    height:180px;
+    background:#2a2a2a;
+    border:2px dashed #ff3b3b;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    overflow:hidden;
+    position:relative;
+    transition:0.3s;
+  }
+
+  .upload-box:hover { background:#333; transform:scale(1.02); }
+
+  .upload-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition:0.3s;
+  }
+
+  .upload-text {
+    position:absolute;
+    color:#fff;
+    font-size:14px;
+    text-align:center;
+    pointer-events:none;
+  }
+
+  .registration-form button { margin-top:20px; width:100%; padding:12px; border:none; border-radius:8px; background:#ff3b3b; font-weight:bold; font-size:18px; color:white; cursor:pointer; transition:0.3s; }
+  .registration-form button:hover { background:#ff5b5b; transform:scale(1.05); }
+
+  .return-btn { background:#555; margin-top:10px; }
+  .return-btn:hover { background:#777; }
+
+  @media(max-width:500px){ .registration-form { padding:20px; } }
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <form class="registration-form" action="upload.php" method="POST" enctype="multipart/form-data">
+
+    <input type="hidden" name="plan" value="<?php echo $selectedPlan; ?>">
+
+    <h2>PowerFit Gym Registration – <?php echo $selectedPlan; ?> Plan</h2>
+    
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname" name="firstname" placeholder="Enter First Name" required>
+
+    <label for="lastname">Last Name</label>
+    <input type="text" id="lastname" name="lastname" placeholder="Enter Last Name" required>
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter Email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+
+    <label for="payment">Upload Payment Screenshot</label>
+    <div class="upload-box" onclick="document.getElementById('paymentimg').click()">
+      <img src="https://cdn-icons-png.flaticon.com/512/1375/1375106.png" id="previewImg">
+      <div class="upload-text" id="uploadText">Click to upload or drag & drop here</div>
+    </div>
+    <input type="file" id="paymentimg" name="paymentimg" accept="image/*" style="display:none;" onchange="previewImage(event)">
+
+    <button type="submit">Submit Registration</button>
+    <button type="button" class="return-btn" onclick="window.location.href='home.html'">Return to Home</button>
+  </form>
+</div>
+
+<script>
+function previewImage(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('previewImg');
+      preview.src = e.target.result; // show uploaded image
+      document.getElementById('uploadText').style.display = 'none'; // hide placeholder text
+    }
+    reader.readAsDataURL(file);
+  }
+}
+</script>
+
+</body>
+</html>
