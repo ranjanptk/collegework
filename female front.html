@@ -311,8 +311,8 @@ document.querySelectorAll('.muscle-top button').forEach(btn=>{
   });
   btn.addEventListener('mouseleave',clearHighlights);
   btn.addEventListener('click',()=>openMusclePage({
-    chest:'chest-f.html', shoulder:'shoulder-f.html', abs:'abs-f.html',
-    oblique:'oblique-f.html', biceps:'biceps-f.html', forearm:'forearm-f.html', quads:'quads-f.html'
+    chest:'chest', shoulder:'shoulder', abs:'abs',
+    oblique:'oblique', biceps:'biceps', forearm:'forearm', quads:'quads'
   }[btn.dataset.part]));
 });
 
@@ -357,7 +357,7 @@ function openMusclePage(muscle){
   const level = getExerciseLevel(userData.age);
 
   window.open(
-    `${muscle} m.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
+    `${muscle}-f.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
     `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
     `&experience=${userData.experience}`,
     "_blank"
@@ -367,13 +367,13 @@ function openMusclePage(muscle){
 
 function handleOpenMuscle(id){
   const map = {
-    leftChest:'chest-f.html', rightChest:'chest-f.html',
-    leftDeltoid:'shoulder-f.html', rightDeltoid:'shoulder-f.html',
-    L1:'abs-f.html', L2:'abs-f.html', L3:'abs-f.html', R1:'abs-f.html', R2:'abs-f.html', R3:'abs-f.html',
-    leftOblique:'oblique-f.html', rightOblique:'oblique-f.html',
-    leftBicep:'biceps-f.html', rightBicep:'biceps-f.html',
-    leftForearm:'forearm-f.html', rightForearm:'forearm-f.html',
-    leftQuad:'quads-f.html', rightQuad:'quads-f.html',
+    leftChest:'chest', rightChest:'chest',
+    leftDeltoid:'shoulder', rightDeltoid:'shoulder',
+    L1:'abs', L2:'abs', L3:'abs', R1:'abs', R2:'abs', R3:'abs',
+    leftOblique:'oblique', rightOblique:'oblique',
+    leftBicep:'biceps', rightBicep:'biceps',
+    leftForearm:'forearm', rightForearm:'forearm',
+    leftQuad:'quads', rightQuad:'quads',
   };
   if(map[id]) openMusclePage(map[id]);
 }
