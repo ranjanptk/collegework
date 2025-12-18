@@ -573,7 +573,7 @@ document.querySelectorAll(".exp-btn").forEach(btn => {
   const level = getExerciseLevel(userData.age);
 
   window.open(
-    `${muscle} f.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
+    `${muscle}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
     `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
     `&experience=${userData.experience}`,
     "_blank"
@@ -581,17 +581,16 @@ document.querySelectorAll(".exp-btn").forEach(btn => {
 }
 
 
-    [leftTrap, rightTrap].forEach(el => el.onclick = () => openMusclePage('trap'));
-    [leftTriceps, rightTriceps].forEach(el => el.onclick = () => openMusclePage('triceps'));
-    [leftCalf, rightCalf].forEach(el => el.onclick = () => openMusclePage('calves'));
-    [leftHamQuad, rightHamQuad].forEach(el => el.onclick = () => openMusclePage('hamquads'));
+    [leftTrap, rightTrap].forEach(el => el.onclick = () => openMusclePage('trap f.html'));
+    [leftTriceps, rightTriceps].forEach(el => el.onclick = () => openMusclePage('triceps f.html'));
+    [leftCalf, rightCalf].forEach(el => el.onclick = () => openMusclePage('calves f.html'));
+    [leftHamQuad, rightHamQuad].forEach(el => el.onclick = () => openMusclePage('hamquads f.html'));
     [leftLat, rightLat].forEach(el => el.onclick = () => openMusclePage('lats f.html'));
-    [leftLowerBack, rightLowerBack].forEach(el => el.onclick = () => openMusclePage('lowerback'));
+    [leftLowerBack, rightLowerBack].forEach(el => el.onclick = () => openMusclePage('lowerback f.html'));
     document.querySelectorAll('.muscle-top button').forEach(btn => { btn.addEventListener('click',
-     () => { openMusclePage(btn.dataset.part); }); });
+     () => { openMusclePage(btn.dataset.part + " f.html"); }); });
   </script>
 
 </body>
 
 </html>
-
