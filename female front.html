@@ -225,160 +225,156 @@ C215,350 257,330 240,310Z" />
 </div>
 
 </div>
-
 <script>
 const infoBox = document.getElementById('infoBox');
 const parts = {
-  leftChest: document.getElementById('leftChest'), rightChest: document.getElementById('rightChest'),
-  leftDeltoid: document.getElementById('leftDeltoid'), rightDeltoid: document.getElementById('rightDeltoid'),
-  L1: document.getElementById('L1'), L2: document.getElementById('L2'), L3: document.getElementById('L3'),
-  R1: document.getElementById('R1'), R2: document.getElementById('R2'), R3: document.getElementById('R3'),
-  leftOblique: document.getElementById('leftOblique'), rightOblique: document.getElementById('rightOblique'),
-  leftBicep: document.getElementById('leftBicep'), rightBicep: document.getElementById('rightBicep'),
-  leftForearm: document.getElementById('leftForearm'), rightForearm: document.getElementById('rightForearm'),
-  leftQuad: document.getElementById('leftQuad'), rightQuad: document.getElementById('rightQuad'),
+    leftChest: document.getElementById('leftChest'), rightChest: document.getElementById('rightChest'),
+    leftDeltoid: document.getElementById('leftDeltoid'), rightDeltoid: document.getElementById('rightDeltoid'),
+    L1: document.getElementById('L1'), L2: document.getElementById('L2'), L3: document.getElementById('L3'),
+    R1: document.getElementById('R1'), R2: document.getElementById('R2'), R3: document.getElementById('R3'),
+    leftOblique: document.getElementById('leftOblique'), rightOblique: document.getElementById('rightOblique'),
+    leftBicep: document.getElementById('leftBicep'), rightBicep: document.getElementById('rightBicep'),
+    leftForearm: document.getElementById('leftForearm'), rightForearm: document.getElementById('rightForearm'),
+    leftQuad: document.getElementById('leftQuad'), rightQuad: document.getElementById('rightQuad'),
 };
 
 const muscleInfo = {
-  chest: { name:"Pectoralis Major", text:"Main chest muscle. Strengthens pushing power, shoulder stability, posture." },
-  shoulder: { name:"Deltoid (Front)", text:"Lifts arm forward, supports presses and shoulder stability." },
-  abs: { name:"Rectus Abdominis", text:"Core flexion, posture, intra-abdominal pressure, athletic performance." },
-  oblique: { name:"External Obliques", text:"Rotate/laterally flex torso, stabilize trunk, improve functional strength." },
-  biceps: { name:"Biceps Brachii", text:"Elbow flexion, forearm supination, pulling strength, aesthetics." },
-  forearm: { name:"Forearm Muscles", text:"Wrist/finger control, grip strength, supports almost every upper-body exercise." },
-  quads: { name:"Quadriceps", text:"Knee extension, powerful leg drive, daily function, knee stability." },
+    chest: { name:"Pectoralis Major", text:"Main chest muscle. Strengthens pushing power, shoulder stability, posture." },
+    shoulder: { name:"Deltoid (Front)", text:"Lifts arm forward, supports presses and shoulder stability." },
+    abs: { name:"Rectus Abdominis", text:"Core flexion, posture, intra-abdominal pressure, athletic performance." },
+    oblique: { name:"External Obliques", text:"Rotate/laterally flex torso, stabilize trunk, improve functional strength." },
+    biceps: { name:"Biceps Brachii", text:"Elbow flexion, forearm supination, pulling strength, aesthetics." },
+    forearm: { name:"Forearm Muscles", text:"Wrist/finger control, grip strength, supports almost every upper-body exercise." },
+    quads: { name:"Quadriceps", text:"Knee extension, powerful leg drive, daily function, knee stability." },
 };
 
-// Highlight groups
 const hoverPairs = {
-  leftChest:['leftChest','rightChest'],
-  rightChest:['leftChest','rightChest'],
-  leftDeltoid:['leftDeltoid','rightDeltoid'],
-  rightDeltoid:['leftDeltoid','rightDeltoid'],
-  leftOblique:['leftOblique','rightOblique'],
-  rightOblique:['leftOblique','rightOblique'],
-  leftBicep:['leftBicep','rightBicep'],
-  rightBicep:['leftBicep','rightBicep'],
-  leftForearm:['leftForearm','rightForearm'],
-  rightForearm:['leftForearm','rightForearm'],
-  leftQuad:['leftQuad','rightQuad'],
-  rightQuad:['leftQuad','rightQuad'],
-  abs:['L1','L2','L3','R1','R2','R3']
+    leftChest:['leftChest','rightChest'],
+    rightChest:['leftChest','rightChest'],
+    leftDeltoid:['leftDeltoid','rightDeltoid'],
+    rightDeltoid:['leftDeltoid','rightDeltoid'],
+    leftOblique:['leftOblique','rightOblique'],
+    rightOblique:['leftOblique','rightOblique'],
+    leftBicep:['leftBicep','rightBicep'],
+    rightBicep:['leftBicep','rightBicep'],
+    leftForearm:['leftForearm','rightForearm'],
+    rightForearm:['leftForearm','rightForearm'],
+    leftQuad:['leftQuad','rightQuad'],
+    rightQuad:['leftQuad','rightQuad'],
+    abs:['L1','L2','L3','R1','R2','R3']
 };
 
 function clearHighlights(){
-  Object.values(parts).forEach(p=>p&&p.classList.remove('hovered'));
-  infoBox.innerHTML=`<h2>Hover a muscle</h2><p>Move your mouse over any body part to see its name and a short description.</p>`;
+    Object.values(parts).forEach(p=>p&&p.classList.remove('hovered'));
+    infoBox.innerHTML=`<h2>Hover a muscle</h2><p>Move your mouse over any body part to see its name and a short description.</p>`;
 }
 
+// Logic for clicking/hovering SVG shapes
 Object.keys(parts).forEach(id=>{
-  const el = parts[id];
-  el.addEventListener('mouseenter',()=>{
-    clearHighlights();
-    if(id.startsWith('L')||id.startsWith('R')){ // abs group
-      hoverPairs['abs'].forEach(p=>parts[p].classList.add('hovered'));
-      infoBox.innerHTML=`<h2>${muscleInfo.abs.name}</h2><p>${muscleInfo.abs.text}</p>`;
-    }else{
-      hoverPairs[id].forEach(p=>parts[p].classList.add('hovered'));
-      let key = id.includes('Chest')?'chest':
-                id.includes('Deltoid')?'shoulder':
-                id.includes('Oblique')?'oblique':
-                id.includes('Bicep')?'biceps':
-                id.includes('Forearm')?'forearm':
-                id.includes('Quad')?'quads':'';
-      if(muscleInfo[key]) infoBox.innerHTML=`<h2>${muscleInfo[key].name}</h2><p>${muscleInfo[key].text}</p>`;
-    }
-  });
-  el.addEventListener('mouseleave', clearHighlights);
-  el.addEventListener('click',()=>handleOpenMuscle(id));
+    const el = parts[id];
+    if(!el) return;
+
+    el.addEventListener('mouseenter',()=>{
+        clearHighlights();
+        if(id.startsWith('L')||id.startsWith('R')){ 
+            hoverPairs['abs'].forEach(p=>parts[p].classList.add('hovered'));
+            infoBox.innerHTML=`<h2>${muscleInfo.abs.name}</h2><p>${muscleInfo.abs.text}</p>`;
+        }else{
+            hoverPairs[id].forEach(p=>parts[p].classList.add('hovered'));
+            let key = id.toLowerCase().includes('chest')?'chest':
+                      id.toLowerCase().includes('deltoid')?'shoulder':
+                      id.toLowerCase().includes('oblique')?'oblique':
+                      id.toLowerCase().includes('bicep')?'biceps':
+                      id.toLowerCase().includes('forearm')?'forearm':
+                      id.toLowerCase().includes('quad')?'quads':'';
+            if(muscleInfo[key]) infoBox.innerHTML=`<h2>${muscleInfo[key].name}</h2><p>${muscleInfo[key].text}</p>`;
+        }
+    });
+
+    el.addEventListener('mouseleave', clearHighlights);
+    
+    // Clicking the SVG part
+    el.addEventListener('click', () => {
+        let muscleKey = id.startsWith('L') || id.startsWith('R') ? 'abs' : 
+                        id.toLowerCase().includes('chest') ? 'chest' :
+                        id.toLowerCase().includes('deltoid') ? 'shoulder' :
+                        id.toLowerCase().includes('oblique') ? 'oblique' :
+                        id.toLowerCase().includes('bicep') ? 'biceps' :
+                        id.toLowerCase().includes('forearm') ? 'forearm' : 'quads';
+        openMusclePage(muscleKey);
+    });
 });
 
+// Logic for top buttons
 document.querySelectorAll('.muscle-top button').forEach(btn=>{
-  btn.addEventListener('mouseenter',()=>{
-    clearHighlights();
-    const part = btn.dataset.part;
-    let pairIds=[];
-    if(part==='chest') pairIds=['leftChest','rightChest'];
-    if(part==='shoulder') pairIds=['leftDeltoid','rightDeltoid'];
-    if(part==='abs') pairIds=hoverPairs['abs'];
-    if(part==='oblique') pairIds=['leftOblique','rightOblique'];
-    if(part==='biceps') pairIds=['leftBicep','rightBicep'];
-    if(part==='forearm') pairIds=['leftForearm','rightForearm'];
-    if(part==='quads') pairIds=['leftQuad','rightQuad'];
-    pairIds.forEach(p=>parts[p].classList.add('hovered'));
-    if(muscleInfo[part]) infoBox.innerHTML=`<h2>${muscleInfo[part].name}</h2><p>${muscleInfo[part].text}</p>`;
-  });
-  btn.addEventListener('mouseleave',clearHighlights);
-  btn.addEventListener('click',()=>openMusclePage({
-    chest:'chest-f.html', shoulder:'shoulder-f.html', abs:'abs-f.html',
-    oblique:'oblique-f.html', biceps:'biceps-f.html', forearm:'forearm-f.html', quads:'quads-f.html'
-  }[btn.dataset.part]));
+    btn.addEventListener('mouseenter',()=>{
+        clearHighlights();
+        const part = btn.dataset.part;
+        let pairIds = (part === 'abs') ? hoverPairs['abs'] : hoverPairs[`left${part.charAt(0).toUpperCase() + part.slice(1, -1)}`];
+        
+        // Fallback mapping for the hover groups
+        if(part === 'chest') pairIds = ['leftChest', 'rightChest'];
+        if(part === 'shoulder') pairIds = ['leftDeltoid', 'rightDeltoid'];
+        if(part === 'biceps') pairIds = ['leftBicep', 'rightBicep'];
+        if(part === 'forearm') pairIds = ['leftForearm', 'rightForearm'];
+        if(part === 'quads') pairIds = ['leftQuad', 'rightQuad'];
+        if(part === 'oblique') pairIds = ['leftOblique', 'rightOblique'];
+
+        pairIds.forEach(p=> parts[p] && parts[p].classList.add('hovered'));
+        if(muscleInfo[part]) infoBox.innerHTML=`<h2>${muscleInfo[part].name}</h2><p>${muscleInfo[part].text}</p>`;
+    });
+    btn.addEventListener('mouseleave',clearHighlights);
+    btn.addEventListener('click',()=> openMusclePage(btn.dataset.part));
 });
 
 let userData=null;
 document.getElementById('confirmBtn').addEventListener('click',()=>{
-  const age=parseInt(document.getElementById('age').value);
-  const height=parseInt(document.getElementById('height').value);
-  const weight=parseInt(document.getElementById('weight').value);
-if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
-
-userData = { age, height, weight };
-
-// Show experience selection box
-document.getElementById('experienceBox').style.display = "block";
-
+    const age=parseInt(document.getElementById('age').value);
+    const height=parseInt(document.getElementById('height').value);
+    const weight=parseInt(document.getElementById('weight').value);
+    if(!age || !height || !weight){ alert("Enter valid Age, Height, Weight"); return; }
+    userData = { age, height, weight };
+    document.getElementById('experienceBox').style.display = "block";
 });
-// Experience selection buttons
+
 document.querySelectorAll(".exp-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const exp = btn.dataset.exp;
-    userData.experience = exp;
-
-    alert("Experience level selected: " + exp);
-
-    // Hide experienceBox after selection
-    document.getElementById('experienceBox').style.display = "none";
-  });
+    btn.addEventListener("click", () => {
+        userData.experience = btn.dataset.exp;
+        alert("Experience level selected: " + userData.experience);
+        document.getElementById('experienceBox').style.display = "none";
+    });
 });
 
-
-function getExerciseLevel(age){ if(age<=14)return{difficulty:"easy",sets:2,reps:10}; else if(age<=20)return{difficulty:"medium",sets:3,reps:12}; else return{difficulty:"hard",sets:4,reps:15}; }
-function openMusclePage(muscle){
-  if(!userData){ 
-    alert("Please confirm Age, Height, Weight first!"); 
-    return; 
-  }
-  if(!userData.experience){
-    alert("Please select your experience level!");
-    return;
-  }
-
-  const level = getExerciseLevel(userData.age);
-
-  window.open(
-    `${muscle} m.html?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
-    `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
-    `&experience=${userData.experience}`,
-    "_blank"
-  );
+function getExerciseLevel(age){ 
+    if(age<=14) return {difficulty:"easy",sets:2,reps:10}; 
+    else if(age<=20) return {difficulty:"medium",sets:3,reps:12}; 
+    else return {difficulty:"hard",sets:4,reps:15}; 
 }
 
+// THE KEY FUNCTION
+function openMusclePage(muscleKey){
+    if(!userData){ 
+        alert("Please confirm Age, Height, Weight first!"); 
+        return; 
+    }
+    if(!userData.experience){
+        alert("Please select your experience level!");
+        return;
+    }
 
-function handleOpenMuscle(id){
-  const map = {
-    leftChest:'chest-f.html', rightChest:'chest-f.html',
-    leftDeltoid:'shoulder-f.html', rightDeltoid:'shoulder-f.html',
-    L1:'abs-f.html', L2:'abs-f.html', L3:'abs-f.html', R1:'abs-f.html', R2:'abs-f.html', R3:'abs-f.html',
-    leftOblique:'oblique-f.html', rightOblique:'oblique-f.html',
-    leftBicep:'biceps-f.html', rightBicep:'biceps-f.html',
-    leftForearm:'forearm-f.html', rightForearm:'forearm-f.html',
-    leftQuad:'quads-f.html', rightQuad:'quads-f.html',
-  };
-  if(map[id]) openMusclePage(map[id]);
+    const level = getExerciseLevel(userData.age);
+    // This constructs the filename correctly as "chest-f.html", etc.
+    const fileName = `${muscleKey}-f.html`;
+
+    window.open(
+        `${fileName}?difficulty=${level.difficulty}&sets=${level.sets}&reps=${level.reps}` +
+        `&age=${userData.age}&height=${userData.height}&weight=${userData.weight}` +
+        `&experience=${userData.experience}`,
+        "_blank"
+    );
 }
 
 clearHighlights();
 </script>
-
 </body>
 </html>
