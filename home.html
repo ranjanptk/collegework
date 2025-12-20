@@ -34,12 +34,29 @@
   .save-btn { background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
   .edit-btn { background: #ff3b3b; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
 
-  /* Hero Section (Restored Background) */
+  /* Hero Section */
   .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; background-image:url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba'); background-size:cover; background-position:center; background-attachment:fixed; color:white; z-index:1; padding:0 20px; opacity:0; transition:opacity 1s ease;}
   .hero::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)); z-index:-1; }
   .hero.show { opacity:1; }
-  .hero h1 { font-size:70px; font-weight:700; display:inline-block; overflow:hidden; white-space:nowrap; border-right:4px solid #ff3b3b; animation:typing 3s steps(30) forwards; color:#ff3b3b; }
-  @keyframes typing { 0% { width:0; } 100% { width:100%; } }
+  
+  /* FIXED TYPING ANIMATION (Cursor disappears at the end) */
+  .hero h1 { 
+    font-size:70px; 
+    font-weight:700; 
+    display:inline-block; 
+    overflow:hidden; 
+    white-space:nowrap; 
+    border-right:4px solid #ff3b3b; 
+    color:#ff3b3b;
+    width: 0;
+  }
+  .hero.show h1 {
+    animation: typing 3s steps(30) forwards, blink 0.7s step-end 4.2; /* 4.2 repeats makes it stop when typing is done */
+    border-right: 0px solid transparent; /* Ensures cursor disappears after animation */
+  }
+
+  @keyframes typing { from { width: 0 } to { width: 100% } }
+  @keyframes blink { from, to { border-color: transparent } 50% { border-color: #ff3b3b } }
 
   .content { padding:100px 50px; background:#111; text-align:center; }
   .content h2 { font-size:38px; color:#ff3b3b; margin-bottom:30px; }
@@ -52,15 +69,37 @@
   .slide img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
   @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
 
-  /* Membership Cards */
+  /* Membership Cards - WITH HOVER ZOOM & LIFT */
   .membership-cards { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-top:40px; }
-  .card { border-radius:16px; padding:30px; width:280px; height:420px; text-align:center; box-shadow:0 0 15px rgba(255,59,59,0.2); display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; background-size:cover; background-position:center;}
-  .card::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:0; }
+  .card { 
+    border-radius:16px; 
+    padding:30px; 
+    width:280px; 
+    height:420px; 
+    text-align:center; 
+    box-shadow:0 0 15px rgba(255,59,59,0.2); 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between; 
+    transition:transform 0.4s ease, box-shadow 0.4s ease; 
+    position:relative; 
+    overflow:hidden; 
+    background-size:cover; 
+    background-position:center;
+  }
+  .card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,59,59,0.6);
+  }
+  .card::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:0; transition: 0.3s;}
+  .card:hover::before { background:rgba(0,0,0,0.3); }
+  
   .card h3, .card p, .price-tag, .join-btn { position:relative; z-index:1; color:white; }
   .price-tag { font-size:28px; font-weight:800; }
-  .join-btn { padding:10px 20px; background:#ff3b3b; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer; }
+  .join-btn { padding:10px 20px; background:#ff3b3b; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer; transition: 0.3s; }
+  .join-btn:hover { background: white; color: #ff3b3b; }
 
-  /* Contact Section (Restored 2 Images & List) */
+  /* Contact Section */
   .contact-section { padding:80px 50px; background:#1a1a1a; text-align:center; border-top:2px solid #ff3b3b; display:flex; justify-content:center; align-items:center; gap:30px; flex-wrap:wrap; }
   .contact-text { text-align:center; max-width:500px; }
   .contact-text h2 { color:#ff3b3b; margin-bottom:30px; font-size:36px; }
@@ -127,7 +166,7 @@
     <div class="slide"><img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1" alt="Gym 4"></div>
     <div class="slide"><img src="https://cdn.unityfitness.vn/2023/11/phong-gym-quan2-ndt-1.jpg" alt="Gym 5"></div>
     <div class="slide"><img src="https://cdn.unityfitness.vn/2024/09/phong-gym-quan2-14-1024x640.jpg" alt="Gym 6"></div>
-    <div class="slide"><img src="https://gymaster.vn/wp-content/uploads/2023/02/nhan-vien-phong-gym-gymaster.vn_.jpg" alt="Gym 7"></div>
+    <div class="slide"><img src="https://static.vecteezy.com/system/resources/thumbnails/023/010/709/small/ai-generative-strong-athletic-men-pumping-up-muscles-workout-bodybuilding-concept-muscular-bodybuilder-men-doing-exercises-in-gym-naked-photo.jpg" alt="Gym 7"></div>
     <div class="slide"><img src="https://th.bing.com/th/id/OIP.dhPmVtL0Tl7CXtzSvdwU4gHaE8" alt="Gym 8"></div>
     <div class="slide"><img src="https://goldsgym.in/wp-content/uploads/2023/12/compress-strong-man-training-gym-min-scaled.jpg" alt="Gym 1"></div>
     <div class="slide"><img src="https://tse1.mm.bing.net/th/id/OIP.hBAHmQfZpAlLkjsURM_leAHaEo" alt="Gym 2"></div>
@@ -182,7 +221,6 @@ function scrollToSection(id){
   if(section) window.scrollTo({ top:section.offsetTop - 70, behavior:'smooth' });
 }
 
-// 1. SAVE PENDING PLAN AND REDIRECT
 function goToReg(planName, phpParam) {
     localStorage.setItem("pendingPlan", planName);
     window.location.href = 'registration.php?plan=' + phpParam;
@@ -194,18 +232,50 @@ function toggleProfile() {
 }
 
 function saveProfile() {
-    let savedData = localStorage.getItem("userProfile");
-    let existingPlan = savedData ? JSON.parse(savedData).plan : "None";
-    
-    const profileData = {
-        name: document.getElementById("userName").value,
-        address: document.getElementById("userAddress").value,
-        email: document.getElementById("userEmail").value,
-        phone: document.getElementById("userPhone").value,
-        plan: existingPlan
-    };
-    localStorage.setItem("userProfile", JSON.stringify(profileData));
-    loadProfile();
+    const name = document.getElementById("userName").value;
+    const address = document.getElementById("userAddress").value;
+    const email = document.getElementById("userEmail").value;
+    const phone = document.getElementById("userPhone").value;
+
+    if(!name || !email) {
+        alert("Please fill in at least Name and Email");
+        return;
+    }
+
+    // 1. Save to Database via AJAX
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('email', email);
+    formData.append('phone', phone);
+
+    fetch('save_profile.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if(data === "Success") {
+            console.log("Database updated successfully");
+            
+            // 2. Save to LocalStorage for immediate UI update
+            let savedData = localStorage.getItem("userProfile");
+            let existingPlan = savedData ? JSON.parse(savedData).plan : "None";
+            
+            const profileData = {
+                name: name,
+                address: address,
+                email: email,
+                phone: phone,
+                plan: existingPlan
+            };
+            localStorage.setItem("userProfile", JSON.stringify(profileData));
+            loadProfile();
+        } else {
+            alert("Error saving to database: " + data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 function loadProfile() {
