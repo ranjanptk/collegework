@@ -19,18 +19,31 @@
   .nav-button { padding:10px 20px; background:#ff3b3b; border:none; color:white; border-radius:8px; font-weight:bold; cursor:pointer; transition:0.3s; }
   .nav-button:hover { background:#ff5b5b; transform:scale(1.05); }
 
-  /* Hero Section */
+  /* Profile Card Styles */
+  .profile-container { position: relative; margin-left: 10px; }
+  .profile-icon img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ff3b3b; cursor: pointer; transition: 0.3s; display: block; }
+  .profile-card { 
+    display: none; position: absolute; top: 55px; right: 0; width: 280px; 
+    background: #222; border: 1px solid #ff3b3b; border-radius: 12px; 
+    padding: 20px; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001;
+  }
+  .profile-card h3 { color: #ff3b3b; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 5px; text-align: center;}
+  .profile-card input { width: 100%; padding: 10px; margin: 5px 0; background: #333; border: 1px solid #444; color: white; border-radius: 5px; outline: none; font-size: 13px; }
+  .profile-card p { font-size: 14px; margin: 8px 0; color: #ccc; text-align: left; border-bottom: 1px solid #333; padding-bottom: 4px;}
+  .profile-card p strong { color: #ff3b3b; }
+  .save-btn { background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
+  .edit-btn { background: #ff3b3b; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
+
+  /* Hero Section (Restored Background) */
   .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; background-image:url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba'); background-size:cover; background-position:center; background-attachment:fixed; color:white; z-index:1; padding:0 20px; opacity:0; transition:opacity 1s ease;}
   .hero::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)); z-index:-1; }
   .hero.show { opacity:1; }
   .hero h1 { font-size:70px; font-weight:700; display:inline-block; overflow:hidden; white-space:nowrap; border-right:4px solid #ff3b3b; animation:typing 3s steps(30) forwards; color:#ff3b3b; }
-  .hero h1.cursor-off { border-right:none; }
   @keyframes typing { 0% { width:0; } 100% { width:100%; } }
 
-  /* Content Section */
   .content { padding:100px 50px; background:#111; text-align:center; }
-  .content h2 { text-align:center; font-size:38px; color:#ff3b3b; margin-bottom:30px; }
-  .content p { color:#ccc; max-width:800px; margin:0 auto; }
+  .content h2 { font-size:38px; color:#ff3b3b; margin-bottom:30px; }
+  .content p { color:#ccc; max-width:800px; margin:0 auto; line-height: 1.6;}
 
   /* Continuous Slider */
   .slider { overflow:hidden; width:100%; position:relative; margin:60px 0; }
@@ -41,31 +54,20 @@
 
   /* Membership Cards */
   .membership-cards { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-top:40px; }
-  .card { border-radius:16px; padding:30px; width:280px; height:420px; text-align:center; box-shadow:0 0 15px rgba(255,59,59,0.2); display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; cursor:pointer; background-size:cover; background-position:center;}
-  .card::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:0; transition:0.3s; }
-  .card:hover::before { background:rgba(0,0,0,0.2); }
+  .card { border-radius:16px; padding:30px; width:280px; height:420px; text-align:center; box-shadow:0 0 15px rgba(255,59,59,0.2); display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; background-size:cover; background-position:center;}
+  .card::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:0; }
   .card h3, .card p, .price-tag, .join-btn { position:relative; z-index:1; color:white; }
-  .card:hover { transform:translateY(-12px) scale(1.05); box-shadow:0 0 30px rgba(255,59,59,0.7); }
   .price-tag { font-size:28px; font-weight:800; }
-  .join-btn { padding:10px 20px; background:#ff3b3b; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer; transition:0.3s; }
-  .join-btn:hover { background:#ff5b5b; transform:scale(1.05); }
+  .join-btn { padding:10px 20px; background:#ff3b3b; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer; }
 
-  /* Contact Section */
+  /* Contact Section (Restored 2 Images & List) */
   .contact-section { padding:80px 50px; background:#1a1a1a; text-align:center; border-top:2px solid #ff3b3b; display:flex; justify-content:center; align-items:center; gap:30px; flex-wrap:wrap; }
-  .contact-section .contact-text { text-align:center; max-width:500px; }
-  .contact-section h2 { color:#ff3b3b; margin-bottom:30px; font-size:36px; }
-  .contact-section p, .contact-section h3 { color:#ccc; font-size:20px; line-height:1.8; }
+  .contact-text { text-align:center; max-width:500px; }
+  .contact-text h2 { color:#ff3b3b; margin-bottom:30px; font-size:36px; }
+  .contact-text p, .contact-text h3 { color:#ccc; font-size:20px; line-height:1.8; }
   .contact-image { width:350px; max-width:100%; border-radius:12px; }
 
   footer { text-align:center; padding:20px; background-color:#000; color:#888; }
-
-  @media(max-width:768px){
-    header { flex-direction:column; text-align:center; }
-    nav ul { flex-direction:column; gap:10px; }
-    .hero h1 { font-size:48px; }
-    .membership-cards { flex-direction:column; align-items:center; }
-    .contact-section { flex-direction:column; gap:20px; }
-  }
 </style>
 </head>
 <body>
@@ -77,10 +79,33 @@
   </div>
   <nav>
     <ul>
-<li><button class="nav-button" onclick="window.location.href='login.html'">Get Started</button></li>
+      <li><button class="nav-button" onclick="window.location.href='login.html'">Get Started</button></li>
       <li><a onclick="scrollToSection('hero')">Home</a></li>
       <li><a onclick="scrollToSection('membership-section')">Services</a></li>
       <li><a onclick="scrollToSection('contact-section')">Contact</a></li>
+      <li class="profile-container">
+        <div class="profile-icon" onclick="toggleProfile()">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+        </div>
+        <div class="profile-card" id="profileCard">
+            <h3>My Profile</h3>
+            <div id="profileInputs">
+                <input type="text" id="userName" placeholder="Full Name">
+                <input type="text" id="userAddress" placeholder="Address">
+                <input type="email" id="userEmail" placeholder="Email">
+                <input type="tel" id="userPhone" placeholder="Phone Number">
+                <button class="save-btn" onclick="saveProfile()">Save Details</button>
+            </div>
+            <div id="profileDisplay" style="display:none;">
+                <p><strong>Name:</strong> <span id="displayName"></span></p>
+                <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+                <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+                <p><strong>Plan:</strong> <span id="displayPlan" style="color:#ff3b3b; font-weight:bold;">None</span></p>
+                <button class="edit-btn" onclick="editProfile()">Edit Info</button>
+            </div>
+        </div>
+      </li>
     </ul>
   </nav>
 </header>
@@ -91,10 +116,9 @@
 
 <section class="content" id="training-section">
   <h2>Our Training Programs</h2>
-  <p>Our training programs are designed to help you reach your fitness goals in a simple, effective, and motivating way. Whether you’re just starting out or already experienced, we offer structured workout plans that focus on strength, endurance, flexibility, and overall health...</p>
+  <p>Our training programs are designed to help you reach your fitness goals in a simple, effective, and motivating way. Whether you’re just starting out or already experienced, we offer structured workout plans that focus on strength, endurance, flexibility, and overall health. With expert guidance and a supportive environment, we help you stay consistent and see real results. Join us today and start your journey toward a stronger, healthier version of yourself!</p>
 </section>
 
-<!-- Slider Section -->
 <section class="slider">
   <div class="slide-track">
     <div class="slide"><img src="https://goldsgym.in/wp-content/uploads/2023/12/compress-strong-man-training-gym-min-scaled.jpg" alt="Gym 1"></div>
@@ -105,88 +129,120 @@
     <div class="slide"><img src="https://cdn.unityfitness.vn/2024/09/phong-gym-quan2-14-1024x640.jpg" alt="Gym 6"></div>
     <div class="slide"><img src="https://gymaster.vn/wp-content/uploads/2023/02/nhan-vien-phong-gym-gymaster.vn_.jpg" alt="Gym 7"></div>
     <div class="slide"><img src="https://th.bing.com/th/id/OIP.dhPmVtL0Tl7CXtzSvdwU4gHaE8" alt="Gym 8"></div>
-    <!-- Duplicate for loop -->
     <div class="slide"><img src="https://goldsgym.in/wp-content/uploads/2023/12/compress-strong-man-training-gym-min-scaled.jpg" alt="Gym 1"></div>
     <div class="slide"><img src="https://tse1.mm.bing.net/th/id/OIP.hBAHmQfZpAlLkjsURM_leAHaEo" alt="Gym 2"></div>
-    <div class="slide"><img src="https://tse3.mm.bing.net/th/id/OIP.uY3Ec9N-29G7JOiSoAyAvAHaE8" alt="Gym 3"></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1" alt="Gym 4"></div>
-    <div class="slide"><img src="https://cdn.unityfitness.vn/2023/11/phong-gym-quan2-ndt-1.jpg" alt="Gym 5"></div>
-    <div class="slide"><img src="https://cdn.unityfitness.vn/2024/09/phong-gym-quan2-14-1024x640.jpg" alt="Gym 6"></div>
-    <div class="slide"><img src="https://gymaster.vn/wp-content/uploads/2023/02/nhan-vien-phong-gym-gymaster.vn_.jpg" alt="Gym 7"></div>
-    <div class="slide"><img src="https://th.bing.com/th/id/OIP.dhPmVtL0Tl7CXtzSvdwU4gHaE8" alt="Gym 8"></div>
   </div>
 </section>
 
-<!-- Membership Plans -->
 <section class="content" id="membership-section">
   <h2>Membership Plans</h2>
   <div class="membership-cards">
     <div class="card" style="background-image:url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80');">
       <h3>Basic Plan</h3>
       <p>Duration: 1 Month</p>
-      <p>Perfect for beginners</p>
       <p class="price-tag">$299</p>
-      <button class="join-btn" onclick="window.location.href='registration.html'">Join Now</button>
+      <button class="join-btn" onclick="goToReg('Basic Plan', 'Basic')">Join Now</button>
     </div>
     <div class="card" style="background-image:url('https://tse4.mm.bing.net/th/id/OIP.HwzURvokMZHKm_K5dkZ-sAHaEo?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
       <h3>Standard Plan</h3>
       <p>Duration: 3 Months</p>
-      <p>Best for steady progress</p>
       <p class="price-tag">$699</p>
-      <button class="join-btn" onclick="window.location.href='registration.html'">Join Now</button>
+      <button class="join-btn" onclick="goToReg('Standard Plan', 'Standard')">Join Now</button>
     </div>
     <div class="card" style="background-image:url('https://th.bing.com/th/id/R.00388c5f267d3d0cae9c5d47f7694e37?rik=4sd1cCI6%2baZLJQ&pid=ImgRaw&r=0');">
       <h3>Premium Plan</h3>
       <p>Duration: 6 Months</p>
-      <p>Ideal for long-term fitness</p>
       <p class="price-tag">$999</p>
-      <button class="join-btn" onclick="window.location.href='registration.html'">Join Now</button>
+      <button class="join-btn" onclick="goToReg('Premium Plan', 'Premium')">Join Now</button>
     </div>
     <div class="card" style="background-image:url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/90c10f3e-fa87-4939-8128-c8da9dbba2f0/dfwe8yy-fdcfb558-62b4-4f78-a342-5a7e4932c6d5.jpg/v1/fill/w_512,h_640,q_75,strp/muscle_hunk_12_by_gustavomax_dfwe8yy-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvOTBjMTBmM2UtZmE4Ny00OTM5LTgxMjgtYzhkYTlkYmJhMmYwXC9kZndlOHl5LWZkY2ZiNTU4LTYyYjQtNGY3OC1hMzQyLTVhN2U0OTMyYzZkNS5qcGciLCJ3aWR0aCI6Ijw9NTEyIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.bfnr4s9446NE874V5oNoJWLChyy9QH-khAxcOg-hhGk');">
       <h3>Elite Plan</h3>
       <p>Duration: 12 Months</p>
-      <p>Complete transformation package</p>
       <p class="price-tag">$1399</p>
-      <button class="join-btn" onclick="window.location.href='registration.html'">Join Now</button>
+      <button class="join-btn" onclick="goToReg('Elite Plan', 'Elite')">Join Now</button>
     </div>
   </div>
 </section>
 
-<!-- Contact Section -->
 <section class="contact-section" id="contact-section">
-  <img src="https://static.vecteezy.com/system/resources/previews/018/933/660/non_2x/businessman-using-smartphone-and-touch-on-virtual-screen-contact-icons-address-phone-wifi-email-contact-us-and-customer-support-hotline-people-connect-free-photo.jpg" alt="Left Contact" class="contact-image">
+  <img src="https://static.vecteezy.com/system/resources/previews/018/933/660/non_2x/businessman-using-smartphone-and-touch-on-virtual-screen-contact-icons-address-phone-wifi-email-contact-us-and-customer-support-hotline-people-connect-free-photo.jpg" alt="Left" class="contact-image">
   <div class="contact-text">
     <h2>Contact us in:</h2>
     <h3>groupa@gmail.com<br><br>Ph No: 9867696969</h3>
-    <p>Members:<br>Sushant Bhatta<br>Ranjan Pathak<br>Subham Paudel<br>Suraj Pd. Shah<br>Silvia Arzel<br>Soni Shah<br>Suman Phuyal</p>
+    <p>Members: Sushant Bhatta, Ranjan Pathak, Subham Paudel, Suraj Pd. Shah, Silvia Arzel, Soni Shah, Suman Phuyal</p>
   </div>
-  <img src="https://csspsg.com/wp-content/uploads/2022/08/iStock-1350836285.jpg" alt="Right Contact" class="contact-image">
+  <img src="https://csspsg.com/wp-content/uploads/2022/08/iStock-1350836285.jpg" alt="Right" class="contact-image">
 </section>
 
-<footer>
-  © 2025 PowerFit Gym | Stay Strong, Stay Fit
-</footer>
+<footer>© 2025 PowerFit Gym | Stay Strong, Stay Fit</footer>
 
 <script>
 function scrollToSection(id){
   const section = document.getElementById(id);
-  if(section){
-    window.scrollTo({ top:section.offsetTop - 70, behavior:'smooth' });
-    if(id === 'hero'){
-      const hero = document.getElementById('hero');
-      hero.classList.remove('show');
-      setTimeout(()=>{ hero.classList.add('show'); }, 100);
-    }
-  }
+  if(section) window.scrollTo({ top:section.offsetTop - 70, behavior:'smooth' });
 }
 
-window.addEventListener('load', ()=>{
-  const heroTitle = document.getElementById('hero-title');
-  setTimeout(()=>{ heroTitle.classList.add('cursor-off'); }, 3000);
-  document.getElementById('hero').classList.add('show');
-});
-</script>
+// 1. SAVE PENDING PLAN AND REDIRECT
+function goToReg(planName, phpParam) {
+    localStorage.setItem("pendingPlan", planName);
+    window.location.href = 'registration.php?plan=' + phpParam;
+}
 
+function toggleProfile() {
+    const card = document.getElementById("profileCard");
+    card.style.display = (card.style.display === "flex") ? "none" : "flex";
+}
+
+function saveProfile() {
+    let savedData = localStorage.getItem("userProfile");
+    let existingPlan = savedData ? JSON.parse(savedData).plan : "None";
+    
+    const profileData = {
+        name: document.getElementById("userName").value,
+        address: document.getElementById("userAddress").value,
+        email: document.getElementById("userEmail").value,
+        phone: document.getElementById("userPhone").value,
+        plan: existingPlan
+    };
+    localStorage.setItem("userProfile", JSON.stringify(profileData));
+    loadProfile();
+}
+
+function loadProfile() {
+    const savedData = localStorage.getItem("userProfile");
+    const displayDiv = document.getElementById("profileDisplay");
+    const inputDiv = document.getElementById("profileInputs");
+
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        document.getElementById("displayName").innerText = data.name || "N/A";
+        document.getElementById("displayAddress").innerText = data.address || "N/A";
+        document.getElementById("displayEmail").innerText = data.email || "N/A";
+        document.getElementById("displayPhone").innerText = data.phone || "N/A";
+        document.getElementById("displayPlan").innerText = data.plan || "None";
+        
+        inputDiv.style.display = "none";
+        displayDiv.style.display = "block";
+    } else {
+        document.getElementById("displayPlan").innerText = "None";
+    }
+}
+
+function editProfile() {
+    document.getElementById("profileInputs").style.display = "block";
+    document.getElementById("profileDisplay").style.display = "none";
+}
+
+window.onload = () => {
+    document.getElementById('hero').classList.add('show');
+    loadProfile();
+};
+
+window.onclick = function(event) {
+    if (!event.target.closest('.profile-container')) {
+        document.getElementById("profileCard").style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
-
